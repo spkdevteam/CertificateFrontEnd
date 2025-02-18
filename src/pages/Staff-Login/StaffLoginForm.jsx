@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
-import { auth, googleProvider } from "../firebase";
-import { signInWithPopup, OAuthProvider } from "firebase/auth";
+// import { auth, googleProvider } from "../firebase";
+// import { signInWithPopup, OAuthProvider } from "firebase/auth";
 
 // Child components
-import PasswordInputBox from '../Components/PasswordInputBox';
-import EmailInputBox from '../Components/EmailInputBox';
-import UsernameInputBox from '../Components/UsernameInputBox';
-import Button from '../Components/Button';
-import ForgotPassword from '../Components/ForgotPassword';
+// import PasswordInputBox from '../Components/PasswordInputBox';
+// import EmailInputBox from '../Components/EmailInputBox';
+// import UsernameInputBox from '../Components/UsernameInputBox';
+// import Button from '../Components/Button';
+// import ForgotPassword from '../Components/ForgotPassword';
 
 const StaffLoginForm = () => {
     const [email, setEmail] = useState('');
@@ -20,24 +20,24 @@ const StaffLoginForm = () => {
 
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    const handleGoogleSignIn = async () => {
-        try {
-            const result = await signInWithPopup(auth, googleProvider);
-            alert(`Welcome ${result.user.displayName}`);
-        } catch (error) {
-            console.error("Google Sign-In Error:", error.message);
-        }
-    };
+    // const handleGoogleSignIn = async () => {
+    //     try {
+    //         const result = await signInWithPopup(auth, googleProvider);
+    //         alert(`Welcome ${result.user.displayName}`);
+    //     } catch (error) {
+    //         console.error("Google Sign-In Error:", error.message);
+    //     }
+    // };
 
-    const handleAppleSignIn = async () => {
-        try {
-            const appleProvider = new OAuthProvider("apple.com");
-            const result = await signInWithPopup(auth, appleProvider);
-            alert(`Welcome ${result.user.displayName || "User"}`);
-        } catch (error) {
-            console.error("Apple Sign-In Error:", error.message);
-        }
-    };
+    // const handleAppleSignIn = async () => {
+    //     try {
+    //         const appleProvider = new OAuthProvider("apple.com");
+    //         const result = await signInWithPopup(auth, appleProvider);
+    //         alert(`Welcome ${result.user.displayName || "User"}`);
+    //     } catch (error) {
+    //         console.error("Apple Sign-In Error:", error.message);
+    //     }
+    // };
 
     const handleChange = (setter, field) => (e) => {
         const value = e.target.value;
