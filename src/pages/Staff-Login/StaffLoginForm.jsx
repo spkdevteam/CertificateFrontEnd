@@ -46,7 +46,7 @@ const StaffLoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let newErrors = {};
-
+ 
         if (!username.trim()) newErrors.username = "Username cannot be empty";
         if (!email.trim()) {
             newErrors.email = "Email cannot be empty";

@@ -146,6 +146,7 @@ const ForgotPasswordForm = () => {
         }
         try {
             const response = await authService.forgotPassword({ identifier });
+            console.log("OTP Response",response)
             if (response.status === 200) {
                 toast.success("OTP sent to your email");
                 setIsOtpSent(true);

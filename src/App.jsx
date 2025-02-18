@@ -103,6 +103,7 @@ import ForgotPasswordForm from './pages/forgotPassword/ForgotPasswordForm';
 // import PatientDetailLayout from './pages/PatientDetail/PatientDetailLayout';
 // import PatientOverview from './pages/PatientDetail/PatientOverview/PatientOverview';
 import Modal from "react-modal";
+import DashboardThree from './pages/DashboardThree/DashboardThree';
 
 Modal.setAppElement("#root");  // Add this
 
@@ -133,6 +134,8 @@ function App() {
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/staff/resetpassword" element={<StaffResetPassword />} />
               <Route path='/forgotpassword' element={<ForgotPasswordForm/>}/>
+              <Route path='/dashboardthree' element={<DashboardThree/>}/>
+
             </Route>
 
             <Route element={<PrivateRoute />}>
@@ -142,9 +145,9 @@ function App() {
             <Route path="/patientAppointment" element={<PatientAppointment />} /> */}
 
               <Route path="/" element={<Layout />}>
-              <Route path="/dashboard" element={<DashboardTwo />} />
+
+              {/* <Route path="/dashboard" element={<DashboardTwo />} /> */}
                 {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-                
                 {/* <Route path="/profile" element={<Profile />} />
                 <Route path="/ViewProfile" element={<ViewProfile />} />
                 <Route path="/rolesAndPermission" element={<RolesAndPerMission />} />
