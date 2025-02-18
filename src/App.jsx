@@ -77,6 +77,7 @@ import StaffOtpVerify from './pages/Staff-OtpVerify/StaffOtpVerify';
 // import PatientAppointment from './pages/PatientDetail/PatientInvoice/patientAppointment/PatientAppointment';
 import DashboardTwo from './pages/DashboardTwo/DashboardTwo';
 import { ToastContainer } from 'react-toastify';
+import ForgotPasswordForm from './pages/forgotPassword/ForgotPasswordForm';
 // import ChairDashBoard from './pages/ChairDashBoard/ChairDashBoard';
 // import Priscription from './components/priscription/Priscription';
 
@@ -101,6 +102,11 @@ import { ToastContainer } from 'react-toastify';
 
 // import PatientDetailLayout from './pages/PatientDetail/PatientDetailLayout';
 // import PatientOverview from './pages/PatientDetail/PatientOverview/PatientOverview';
+import Modal from "react-modal";
+import DashboardThree from './pages/DashboardThree/DashboardThree';
+
+Modal.setAppElement("#root");  // Add this
+
 
 function App() {
   // const [isDark] = useDarkmode()
@@ -127,6 +133,9 @@ function App() {
               <Route path="/staff/signinbyotp" element={<StaffOtpVerify />} />
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/staff/resetpassword" element={<StaffResetPassword />} />
+              <Route path='/forgotpassword' element={<ForgotPasswordForm/>}/>
+              <Route path='/dashboardthree' element={<DashboardThree/>}/>
+
             </Route>
 
             <Route element={<PrivateRoute />}>
@@ -136,9 +145,9 @@ function App() {
             <Route path="/patientAppointment" element={<PatientAppointment />} /> */}
 
               <Route path="/" element={<Layout />}>
-              <Route path="/dashboard" element={<DashboardTwo />} />
+
+              {/* <Route path="/dashboard" element={<DashboardTwo />} /> */}
                 {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-                
                 {/* <Route path="/profile" element={<Profile />} />
                 <Route path="/ViewProfile" element={<ViewProfile />} />
                 <Route path="/rolesAndPermission" element={<RolesAndPerMission />} />
