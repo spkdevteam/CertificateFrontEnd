@@ -1,0 +1,14 @@
+
+.timeline-label {
+    position: relative
+}
+.timeline-label:before {
+     content: "";
+     position: absolute;
+        left: 3rem;
+        width: 3px;
+        top: 0;
+        bottom: 0;
+        /* background-color: #F1F1F4; */
+        background-color: red;
+ }

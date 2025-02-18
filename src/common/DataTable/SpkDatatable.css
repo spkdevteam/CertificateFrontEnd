@@ -1,0 +1,13 @@
+@media print {
+    .data-table-class {
+      overflow: visible !important;
+      max-height: none !important;
+    }
+    .rdt_Table {
+      display: table !important;
+    }
+    .rdt_TableRow {
+      page-break-inside: avoid;
+    }
+  }
+  
