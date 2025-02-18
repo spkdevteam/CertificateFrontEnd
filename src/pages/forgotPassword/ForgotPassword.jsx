@@ -1,5 +1,6 @@
 import React, { memo, useState } from 'react';
-import img from "../../assets/images/logo/Kosmo-Clinic-Logo.svg"
+// import img from "../../assets/images/logo/Kosmo-Clinic-Logo.svg"
+import img from "../../assets/images/icon/image-office.jpg"
 
 import useWidth from '../../Hooks/useWidth';
 import useDarkmode from '../../Hooks/useDarkMode';
@@ -27,7 +28,7 @@ const ForgotPassword = () => {
         <div className=' min-h-screen w-full flex justify-center '>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 '>
                 {/* image div */}
-                <div className=' flex items-center justify-center bg-[#1c212e] '>
+                <div className=' flex items-center justify-center '>
                     <div className='mx-5'>
                         <img
                             src={img}
