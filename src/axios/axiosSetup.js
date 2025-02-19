@@ -19,6 +19,22 @@ const accountsapi = axios.create({
   timeout: 5000,  
 });
 
+const hrApi = axios.create({
+  baseURL: import.meta.env.VITE_HR_URL,  
+  headers: {
+    'Content-Type': 'application/json',  
+  },
+  timeout: 5000,  
+});
+
+const certificateapi = axios.create({
+  baseURL: import.meta.env.VITE_CERTIFICATE_URL,  
+  headers: {
+    'Content-Type': 'application/json',  
+  },
+  timeout: 5000,  
+});
+
  
 inventoryapi.interceptors.request.use(
   (config) => {
@@ -33,4 +49,4 @@ inventoryapi.interceptors.request.use(
   }
 );
 
-export { inventoryapi ,accountsapi};
+export { inventoryapi ,accountsapi,certificateapi,hrApi};

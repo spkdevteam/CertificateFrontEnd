@@ -104,6 +104,8 @@ import ForgotPasswordForm from './pages/forgotPassword/ForgotPasswordForm';
 // import PatientOverview from './pages/PatientDetail/PatientOverview/PatientOverview';
 import Modal from "react-modal";
 import DashboardThree from './pages/DashboardThree/DashboardThree';
+import DashBoard from './pages/Dashboard/DashBoard';
+import ViewCertificate from './pages/viewCertificate/ViewCerticate';
 
 Modal.setAppElement("#root");  // Add this
 
@@ -125,7 +127,7 @@ function App() {
           <Route path="/" element={<AuthLayout />}>
             <Route element={<PublicRoutes />}>
               <Route path="/" element={<StaffLogin />} />
-              <Route path="/signIn" element={<Login />} />
+              <Route path="/signIn" element={<StaffLogin />} />
               <Route path="/staff/login" element={<StaffLogin />} />
               <Route path="/forgotpassword" element={<ForgotPassword />} />
               <Route path="/staff/forgotpassword" element={<StaffForgotPassword />} />
@@ -134,11 +136,15 @@ function App() {
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/staff/resetpassword" element={<StaffResetPassword />} />
               <Route path='/forgotpassword' element={<ForgotPasswordForm/>}/>
-              <Route path='/dashboardthree' element={<DashboardThree/>}/>
+              <Route path='/dashboard' element={<DashBoard/>}/>
+              <Route path='/viewCertificate' element={<ViewCertificate/>}/>
 
             </Route>
 
             <Route element={<PrivateRoute />}>
+            <Route path='/dashboard' element={<DashBoard/>}/>
+            
+            
             {/* <Route path="/previewCaseDetails" element={<PreviewCaseDetails />} />
             <Route path="/previewPrescription" element={<PreviewPrescription />} />
             <Route path="/patientPrescription" element={<Priscription />} />
@@ -231,7 +237,7 @@ function App() {
             </Route>
             </Route>
             </Route>
-          <Route path="*" element={<Dashboard />} />
+          <Route path="*" element={<DashBoard />} />
 
         </Routes>
 

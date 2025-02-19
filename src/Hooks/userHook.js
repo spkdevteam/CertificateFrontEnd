@@ -1,4 +1,6 @@
 import { useState } from "react"
+import toast from "react-hot-toast"
+import handleAPiloginUser from "../services/user/loginUser"
 
 const userAuth = {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODIwODRkYTg0MGYzYTdiZjFhMmY3MiIsImVtYWlsIjoia2FzaWZidTJAeW9wbWFpbC5jb20iLCJpYXQiOjE3Mzk4MjE4NTcsImV4cCI6MTczOTkwODI1N30.HDzL5zVnfiMYNboGnkelTYT06g94Hi98XK6YTLRuiPM",
@@ -28,14 +30,14 @@ const userAuth = {
                             "access": true,
                             "_id": "6782084da840f3a7bf1a2f86"
                         },
-                        back:{
+                        back: {
                             "name": "Employee",
                             "displayName": "All Employee",
                             "access": true,
                             "_id": "6782084da840f3a7bf1a2f86"
 
                         },
-                        Home:{
+                        Home: {
                             "name": "Employee",
                             "displayName": "All Employee",
                             "access": true,
@@ -87,7 +89,7 @@ const userAuth = {
                                     "_id": "6782084da840f3a7bf1a2f8e"
                                 }
                             },
-                           
+
                             "_id": "6782084da840f3a7bf1a2f8c"
                         },
                         Rules: {
@@ -109,14 +111,14 @@ const userAuth = {
                                     "access": true,
                                     "_id": "6782084da840f3a7bf1a2f8e"
                                 },
-                                back:{
+                                back: {
                                     "name": "Employee",
                                     "displayName": "All Employee",
                                     "access": true,
                                     "_id": "6782084da840f3a7bf1a2f86"
-        
+
                                 },
-                                Home:{
+                                Home: {
                                     "name": "Employee",
                                     "displayName": "All Employee",
                                     "access": true,
@@ -158,18 +160,28 @@ const userAuth = {
 
 
 const useHandleUserHook = () => {
-            const [userSlice, setUserSlice] = useState(userAuth)
-            const [login, setLogin] = useState(false)
-            const [isTokenValid, setTokenValid] = useState()
-            const verifyTocken = ({ token }) => {
-                setLogin(prev => prev + 1)
+    const [userSlice, setUserSlice] = useState(userAuth)
+    const [login, setLogin] = useState(false)
+    const [isTokenValid, setTokenValid] = useState()
+    const verifyTocken = ({ token }) => {
+        setLogin(prev => prev + 1)
 
-                if (login % 2) setTokenValid(true)
-                else setTokenValid(false)
-            }
+        if (login % 2) setTokenValid(true)
+        else setTokenValid(false)
+    }
+
+    const loginUser =  ({ userName, password, email }) => {
+        
+       
+        console.log( userName, password, email,'8888888888888')
+        const result =  handleAPiloginUser({ email: email, password: password, userName: userName })
+        return   result
 
 
-            return { verifyTocken, isTokenValid, userSlice }
-        }
+    }
+
+
+    return { verifyTocken, isTokenValid, userSlice,loginUser }
+}
 
 export default useHandleUserHook

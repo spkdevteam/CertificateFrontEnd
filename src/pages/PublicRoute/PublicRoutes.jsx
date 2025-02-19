@@ -6,7 +6,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const PublicRoutes = () => {
  
-    const token = localStorage.getItem("KOSMO_client_token")
+    const {token }=   ''
   return token
     ? <Navigate to="/dashboard" replace />
     : ( 

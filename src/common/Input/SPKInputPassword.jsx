@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import { Eye, EyeOff } from 'lucide-react';
 import { div } from 'framer-motion/client';
 
-const SPKInputPassword = ({ value, className, onChange, onErrorExist }) => {
+const SPKInputPassword = ({ value,name, className, onChange, onErrorExist }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(false);
     
@@ -24,7 +24,8 @@ const SPKInputPassword = ({ value, className, onChange, onErrorExist }) => {
             <input
             type={showPassword ? 'text' : 'password'}
             value={value}
-            onChange={onChange}
+            name={name}
+            onChange={(e)=>onChange(e)}
             className={`${className} pr-10 ${error ? 'border-red-500' : ''}`}
             placeholder="Password"
             onBlur={handleBlur}
