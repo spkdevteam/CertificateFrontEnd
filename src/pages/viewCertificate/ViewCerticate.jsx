@@ -11,14 +11,18 @@ const ViewCertificate = ()=>{
 
     return(
         <div className="w-full h-full   flex justify-center items-center  ">
-            <div className="lg:container border-8 h-screen flex flex-col gap-4 ">
+            <div className="lg:container border-8 h-screen flex flex-col gap-2 ">
 
                 <div className="w-full h-20 rounded-md shadow-xl  ">
                     <SearchCertificate onChange={setSelectedCertificate}/>
                 </div>
-                <div className="w-full h-full rounded-md shadow-xl ">
-                    <CerticateView value={selectedCertificate} />
-                </div>
+             <div className="w-full h-full  rounded-md shadow-xl  "> 
+                             <CerticateView value={selectedCertificate} />
+
+
+                </div> 
+
+
 
                 
             </div>
