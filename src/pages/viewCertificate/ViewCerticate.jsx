@@ -18,15 +18,15 @@ const ViewCertificate = () => {
                     <SearchCertificate onChange={setSelectedCertificate} />
 
                 </div>
-                {/* <div className="w-full   rounded-md shadow-xl  ">
+                <div className="w-full   rounded-md shadow-xl  ">
 
                     <LandingPageCertificate />
-                </div> */}
+                </div>
                 <div className="w-full h-full  rounded-md shadow-xl  ">
                     <CerticateView value={selectedCertificate} />
 
 
-                </div> 
+                </div>
 
 
 
