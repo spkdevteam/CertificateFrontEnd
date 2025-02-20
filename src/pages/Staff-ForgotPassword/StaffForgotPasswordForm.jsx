@@ -7,35 +7,35 @@ import { FaEyeSlash } from "react-icons/fa";
 import useDarkmode from "../../Hooks/useDarkMode";
 import authStaffService from "../../services/authStaff.service";
 import toast from "react-hot-toast";
+import useHandleUserHook from "../../Hooks/userHook";
 
 const StaffForgotPasswordForm = () => {
-
-    const dispatch = useDispatch();
+    const{forgotUser}=useHandleUserHook()
     const [isViewed, setIsViewed] = useState(false);
     const [loading, setLoading] = useState(false)
     const [isPasswordVissible, setIsPasswordVissile] = useState(false);
     const [showAddButton, setShowAddButton] = useState(true)
     const [isDark] = useDarkmode()
     const [formData, setFormData] = useState({
-        identifier: ""
+        email: ""
     })
-    const { identifier } = formData
+    const { email } = formData
     const [formDataErr, setFormDataErr] = useState({
-        identifier: ""
+        email: ""
     })
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        if (name == "identifier") {
+        if (name == "email") {
             if (value == "") {
                 setFormDataErr((prev) => ({
                     ...prev,
-                    identifier: "Email or Phone No. Is Required",
+                    email: "Email or Phone No. Is Required",
                 }));
             } else {
                 setFormDataErr((prev) => ({
                     ...prev,
-                    identifier: "",
+                    email: "",
                 }));
             }
         }
@@ -48,15 +48,15 @@ const StaffForgotPasswordForm = () => {
 
     // ----- Applying Validation ----------
     function validationFunction() {
-        if (!identifier) {
+        if (!email) {
             setFormDataErr((prev) => ({
                 ...prev,
-                identifier: "Email or Phone No. Is Required",
+                email: "Email or Phone No. Is Required",
             }));
         } else {
             setFormDataErr((prev) => ({
                 ...prev,
-                identifier: "",
+                email: "",
             }));
         }
 
@@ -70,22 +70,26 @@ const StaffForgotPasswordForm = () => {
         setIsViewed(false);
         setLoading(true)
         validationFunction();
-        if (!identifier) {
-            toast.error("Enter Email or Phone");
+        if (!email) {
+            toast.error("Enter Email");
             setLoading(false)
 
             return;
         }
         try {
             const data = formData
-            const response = await authStaffService.forgotPassword(data);
+            const result = await forgotUser({data});
             toast.success(response.data.message);
-            if (response.status == 200) {
-                navigate("/staff/resetpassword",{state:{identifier}})
+            if (result?.status) {
+                navigate("/staff/resetpassword",{state:{data}})
                 setLoading(false)
             }
+            else{
+                toast.error('requiered fields are empty ')
+
+            }
         } catch (error) {
-            toast.error(error?.response?.data?.message);
+    console.log(error)
             setLoading(false)
 
         }
@@ -102,17 +106,17 @@ const StaffForgotPasswordForm = () => {
                     Email or Phone Number <span className="text-red-500">*</span>
                 </p>
                 <input
-                    name="identifier"
+                    name="email"
                     type="text"
                     placeholder="Enter Email or Phone Number"
-                    value={identifier}
+                    value={email}
                     onChange={handleChange}
                     className="form-control outline-none w-96 rounded-md px-4 py-2 bg-light dark:bg-darkIconAndSearchBg dark:placeholder-darkPlaceholder"
                     readOnly={isViewed}
                 />
                 {
                     <p className="text-sm text-red-500">
-                        {formDataErr.identifier}
+                        {formDataErr.email}
                     </p>
                 }
             </label>

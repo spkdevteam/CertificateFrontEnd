@@ -8,6 +8,15 @@ const CerticateView = ({ value }) => {
     useEffect(() => {
         console.log(value, 'selectedCertificateselectedCertificateselectedCertificate')
     }, [value])
+
+    if(!value || Object.keys(value).length===0){
+      return(
+        <div className="flex justify-center items-center h-full">
+        <h2 className="text-lg font-semibold text-red-500">No data available</h2>
+      </div>
+
+      )
+    }
     return (
        
 
@@ -45,12 +54,12 @@ const CerticateView = ({ value }) => {
   <img src={image1} alt="" className="w-full h-auto object-cover" />
 
   <div className="absolute  flex flex-col items-center space-y-2  bg-opacity-50 px-4 mt-0 rounded">
-    <p className="text-black font-extralight text-[8px] md:text-lg lg:text-lg pt-3 md:pt-8 xl:text-xl">Certificate Number</p>
-    <p className="text-black font-extralight text-[8px] md:text-lg lg:text-lg pt-0 xl:text-xl">Gross Weight</p>
-    <p className="text-black font-extralight text-[8px] md:text-lg lg:text-lg pt-0 xl:text-xl" >Metal Fineness</p>
-    <p className="text-black font-extralight text-[8px] md:text-lg lg:text-lg pt-0 xl:text-xl">Certified Assayer</p>
-    <p className="text-black font-extralight text-[8px] md:text-lg  lg:text-lg pt-0 xl:text-xl">Al Sarayat Street, Jumeirah Lakes Towers, DMCC, Sheikh Zayed Road,</p>
-    <p className="text-black font-extralight text-[8px] md:text-lg lg:text-lg pt-0 xL:text-xl">Tel: +97143679030</p>
+    <p className="text-black font-light text-[8px] [@media(min-width:645px)_and_(max-width:720px)]:text-lg [@media(min-width:645px)_and_(max-width:720px)]:pt-14 [@media(min-width:344px)_and_(max-width:415px)]:pt-7 md:text-lg lg:text-lg pt-3 md:pt-8  xl:text-xl">Certificate Number:{value?.certificateNumber}</p>
+    <p className="text-black font-light text-[8px] [@media(min-width:645px)_and_(max-width:720px)]:text-lg md:text-lg lg:text-lg pt-0 xl:text-xl">Gross Weight:{value.goldWeight}</p>
+    <p className="text-black font-light text-[8px] [@media(min-width:645px)_and_(max-width:720px)]:text-lg md:text-lg lg:text-lg pt-0 xl:text-xl" >Metal Fineness:{value.goldFineness}</p>
+    <p className="text-black font-light text-[8px] [@media(min-width:645px)_and_(max-width:720px)]:text-lg md:text-lg lg:text-lg pt-0 xl:text-xl">Certified Assayer</p>
+    <p className="text-black font-light text-[8px] [@media(min-width:645px)_and_(max-width:720px)]:text-lg md:text-lg  lg:text-lg pt-0 xl:text-xl">Al Sarayat Street, Jumeirah Lakes Towers,DMCC, Sheikh Zayed Road,</p>
+    <p className="text-black font-light text-[8px] [@media(min-width:645px)_and_(max-width:720px)]:text-lg md:text-lg lg:text-lg pt-0  xL:text-xl">Tel: +97143679030</p>
 
 
     

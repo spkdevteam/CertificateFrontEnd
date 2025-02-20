@@ -135,7 +135,7 @@ function App() {
               <Route path="/staff/signinbyotp" element={<StaffOtpVerify />} />
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/staff/resetpassword" element={<StaffResetPassword />} />
-              <Route path='/forgotpassword' element={<ForgotPasswordForm/>}/>
+            <Route path='/forgotpassword' element={<ForgotPasswordForm/>}/>
               <Route path='/dashboard' element={<DashBoard/>}/>
               <Route path='/viewCertificate' element={<ViewCertificate/>}/>
 

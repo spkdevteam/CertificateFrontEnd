@@ -1,6 +1,8 @@
 import { useState } from "react"
 import toast from "react-hot-toast"
 import handleAPiloginUser from "../services/user/loginUser"
+import handleForgotPassword from "../services/user/forgotPasswordUser"
+import handleOtp from "../services/user/otpUser"
 
 const userAuth = {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODIwODRkYTg0MGYzYTdiZjFhMmY3MiIsImVtYWlsIjoia2FzaWZidTJAeW9wbWFpbC5jb20iLCJpYXQiOjE3Mzk4MjE4NTcsImV4cCI6MTczOTkwODI1N30.HDzL5zVnfiMYNboGnkelTYT06g94Hi98XK6YTLRuiPM",
@@ -173,15 +175,25 @@ const useHandleUserHook = () => {
     const loginUser =  ({ userName, password, email }) => {
         
        
-        console.log( userName, password, email,'8888888888888')
-        const result =  handleAPiloginUser({ email: email, password: password, userName: userName })
+        // console.log( userName, password, email,'8888888888888')
+        const result =  handleAPiloginUser({ email: email, password: password,  })
         return   result
 
 
     }
 
+    const forgotUser=({email})=>{
+        const result=handleForgotPassword({email:email})
+        return result
+    }
 
-    return { verifyTocken, isTokenValid, userSlice,loginUser }
+    const otpUser=({id,otp})=>{
+        const result=handleOtp({id:id,otp:otp})
+        return result
+    }
+
+
+    return { verifyTocken, isTokenValid, userSlice,loginUser,forgotUser,otpUser }
 }
 
 export default useHandleUserHook

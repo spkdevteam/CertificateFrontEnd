@@ -1,8 +1,15 @@
+import { hrApi } from "../../axios/axiosSetup"
 
 
-const handleAPiloginUser = ({email,password,username})=>{
+const handleAPiloginUser = async({email,password})=>{
     const clilentId = ''
-    return {status:true,message:'login succes',data:{Name:'sandeep' ,lastName:'pachat' ,mobile:7907441232 ,email:'sandeeppachat@gmail.com' }}
+
+    const data={
+        email:email,
+        password:password
+    }
+    const result=await hrApi.post(`/users/signin`,data)
+    return result?.data
 }
 
 export default handleAPiloginUser

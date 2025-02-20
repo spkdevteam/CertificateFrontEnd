@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 // import img from "../../assets/images/logo/Kosmo-Clinic-Logo.svg"
 import img from "../../assets/images/icon/image-office.jpg"
 
@@ -9,24 +9,56 @@ import ForgotPasswordForm from './ForgotPasswordForm';
 
 
 const ForgotPassword = () => {
-
+    const [passwordUpdateStages, setPasswordUpdateStages] = useState(1)
     const { width, breakpoints } = useWidth();
     const [isDark] = useDarkmode();
 
     const [formData, setFormData] = useState({
         email: '',
         password: '',
+        otp:'',
+        password:'',
+        _id:''
     });
 
     const [formDataError, setFormDataError] = useState({});
+useEffect(()=>{
+
+    console.log(formData,'-ppppppppppppppppp')
+},[formData])
+    
+
 
 
 
 
 
     return (
-        <div className=' min-h-screen w-full flex justify-center '>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 '>
+        // <div className=' min-h-screen w-full flex justify-center '>
+
+        //     {
+        //         passwordUpdateStages == 1 ?
+        //             <div onClick={() => {setPasswordUpdateStages(2) ; setFormData(prev=>({...prev,email:'sandeep'}))}} className='h-10 bg-green-300 '>
+        //                 Email submission
+        //             </div>
+        //             : passwordUpdateStages == 2 ?
+        //                 <div onClick={() => {setPasswordUpdateStages(3); setFormData(prev=>({...prev,otp:'1245'}))}} className='h-10 bg-pink-300 '>
+        //                     OtpSubMission
+        //                 </div>
+        //                 : <div onClick={() => {setPasswordUpdateStages(1); setFormData(prev=>({...prev,password:'password'}))}} className='h-10 bg-gray-300 '>
+        //                     New PassWord Submission
+        //                 </div>
+
+        //     }
+
+
+
+        // </div>
+
+             <div className=' min-h-screen w-full flex justify-center '>
+
+
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 '>
                 {/* image div */}
                 <div className=' flex items-center justify-center '>
                     <div className='mx-5'>
@@ -56,7 +88,7 @@ const ForgotPassword = () => {
                 </div>
 
             </div>
-        </div>
+            </div>
     );
 };
 

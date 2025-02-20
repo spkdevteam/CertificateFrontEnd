@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import useHandleUserHook from "../../Hooks/userHook";
 import toast from "react-hot-toast";
 import { ToastContainer } from "react-toastify";
+import SPKBaseBTN from "../../common/Button/SPKBaseBTN";
+import { SPKBTNSubmitAndAdd } from "../../common/Button/SPKBTNSubmitAndAdd";
 
 const StaffLoginForm = () => {
     const [formData, setFormData] = useState({
@@ -48,7 +50,7 @@ const StaffLoginForm = () => {
             }
             else {
 
-                const result = loginUser({ email: formData.email, password: formData.password, userName: formData.userName })
+                const result = loginUser({email: formData.email, password: formData.password })
                 if (result.status) {
                     toast.success(result.message)
                     navigate('/dashboard')
@@ -135,11 +137,14 @@ const StaffLoginForm = () => {
                                     )}
                                 </div>
 
-                                <SPKBTNInsert
+                                {/* <SPKBTNSubmitAndAdd
                                     onClick={handleSubmit}
                                     type="submit"
                                     className="w-full rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-green-500"
-                                />
+                                /> */}
+
+                <button className="px-4 py-2 bg-blue-500 text-white rounded mr-2" onClick={handleSubmit} type="submit">Sign In</button>
+
 
                                 <div className="relative flex items-center justify-center text-gray-500">
                                     <span className="px-4 text-sm font-medium">Or</span>
