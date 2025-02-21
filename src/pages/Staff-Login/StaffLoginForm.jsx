@@ -38,7 +38,7 @@ const StaffLoginForm = () => {
 
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
 
         e.preventDefault();
         try {
@@ -50,13 +50,15 @@ const StaffLoginForm = () => {
             }
             else {
 
-                const result = loginUser({email: formData.email, password: formData.password })
-                if (result.status) {
-                    toast.success(result.message)
+                const result = await loginUser({email: formData.email, password: formData.password })
+                console.log(result)
+                if (result?.status===true) {
+                    toast.success(result?.message)
                     navigate('/dashboard')
                 }
             }
         } catch (error) {
+            console.log(error)
 
         }
 
@@ -98,7 +100,7 @@ const StaffLoginForm = () => {
                             </p>
 
                             <div className="mt-8 space-y-4">
-                                <div>
+                                {/* <div>
                                     <h1>Username</h1>
                                     <SPKInputText
                                         name='userName'
@@ -109,10 +111,10 @@ const StaffLoginForm = () => {
                                     {errors.username && (
                                         <p className="text-red-500 text-sm">{errors.username}</p>
                                     )}
-                                </div>
+                                </div> */}
 
                                 <div>
-                                    <h1>Email</h1>
+                                    <h1>UserId</h1>
                                     <SPKInputEmail
                                         value={formData.email}
                                         name={'email'}

@@ -2,13 +2,16 @@ import { hrApi } from "../../axios/axiosSetup"
 
 
 const handleAPiloginUser = async({email,password})=>{
-    const clilentId = ''
+    const clientId = import.meta.env.VITE_CLIENTID
 
     const data={
-        email:email,
-        password:password
+        userId:email,
+        password:password,
+        clientId:clientId
+
     }
     const result=await hrApi.post(`/users/signin`,data)
+    console.log(result?.data)
     return result?.data
 }
 

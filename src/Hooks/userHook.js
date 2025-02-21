@@ -3,6 +3,7 @@ import toast from "react-hot-toast"
 import handleAPiloginUser from "../services/user/loginUser"
 import handleForgotPassword from "../services/user/forgotPasswordUser"
 import handleOtp from "../services/user/otpUser"
+import handleReset from "../services/user/resetPasswordUser"
 
 const userAuth = {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODIwODRkYTg0MGYzYTdiZjFhMmY3MiIsImVtYWlsIjoia2FzaWZidTJAeW9wbWFpbC5jb20iLCJpYXQiOjE3Mzk4MjE4NTcsImV4cCI6MTczOTkwODI1N30.HDzL5zVnfiMYNboGnkelTYT06g94Hi98XK6YTLRuiPM",
@@ -172,28 +173,31 @@ const useHandleUserHook = () => {
         else setTokenValid(false)
     }
 
-    const loginUser =  ({ userName, password, email }) => {
-        
-       
-        // console.log( userName, password, email,'8888888888888')
-        const result =  handleAPiloginUser({ email: email, password: password,  })
-        return   result
+    const loginUser = ({email,password}) => {
+
+        const result = handleAPiloginUser({email,password })
+        return result
 
 
     }
 
-    const forgotUser=({email})=>{
-        const result=handleForgotPassword({email:email})
+    const forgotUser = ({ email }) => {
+        const result = handleForgotPassword({ email: email })
         return result
     }
 
-    const otpUser=({id,otp})=>{
-        const result=handleOtp({id:id,otp:otp})
+    const otpUser = ({ id, otp }) => {
+        const result = handleOtp({ id: id, otp: otp })
+        return result
+    }
+
+    const resetUser = ({ id, password, otp }) => {
+        const result = handleReset({ id, password, otp })
         return result
     }
 
 
-    return { verifyTocken, isTokenValid, userSlice,loginUser,forgotUser,otpUser }
+    return { verifyTocken, isTokenValid, userSlice, loginUser, forgotUser, otpUser, resetUser }
 }
 
 export default useHandleUserHook
