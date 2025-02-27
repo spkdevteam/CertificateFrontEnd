@@ -7,17 +7,11 @@ import ResetPasswordForm from './ResetPasswordForm';
 
 
 
-const ResetPassword = () => {
+const ResetPassword = ({formData,setFormData}) => {
 
     const { width, breakpoints } = useWidth();
     const [isDark] = useDarkmode();
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
-
-    const [formDataError, setFormDataError] = useState({});
 
 
 
@@ -42,7 +36,7 @@ const ResetPassword = () => {
                 <div className='flex flex-col justify-center items-center '>
                     <h3 className='text-3xl font-bold mb-5'>Reset Your Passward</h3>
                     <div className='mt-5'>
-                    <ResetPasswordForm />
+                    <ResetPasswordForm formData={formData} setFormData={setFormData}/>
                     </div>
                     <div className="text-xs mt-20 font-normal  text-gray-500 dark:text-slate-400 z-[999] pb-10 text-center flex">
                         Powered By

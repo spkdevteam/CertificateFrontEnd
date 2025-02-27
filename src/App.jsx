@@ -106,6 +106,8 @@ import Modal from "react-modal";
 import DashboardThree from './pages/DashboardThree/DashboardThree';
 import DashBoard from './pages/Dashboard/DashBoard';
 import ViewCertificate from './pages/viewCertificate/ViewCerticate';
+import Time from './pages/Timer/Time';
+import ParrentWatch from './pages/Timer/ParrentWatch';
 
 Modal.setAppElement("#root");  // Add this
 
@@ -135,13 +137,13 @@ function App() {
               <Route path="/staff/signinbyotp" element={<StaffOtpVerify />} />
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/staff/resetpassword" element={<StaffResetPassword />} />
-              <Route path='/forgotpassword' element={<ForgotPasswordForm/>}/>
+            <Route path='/forgotpassword' element={<ForgotPasswordForm/>}/>
               <Route path='/dashboard' element={<DashBoard/>}/>
               <Route path='/viewCertificate' element={<ViewCertificate/>}/>
 
-            </Route>
+            <Route path="/watch" element={<ParrentWatch/>}/>
 
-            <Route element={<PrivateRoute />}>
+            <Route element={<PrivateRoute />}/>
             <Route path='/dashboard' element={<DashBoard/>}/>
             
             
