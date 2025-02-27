@@ -108,6 +108,7 @@ import DashBoard from './pages/Dashboard/DashBoard';
 import ViewCertificate from './pages/viewCertificate/ViewCerticate';
 import Time from './pages/Timer/Time';
 import ParrentWatch from './pages/Timer/ParrentWatch';
+import Activity from './pages/Activity/Activity';
 
 Modal.setAppElement("#root");  // Add this
 
@@ -142,6 +143,7 @@ function App() {
               <Route path='/viewCertificate' element={<ViewCertificate/>}/>
 
             <Route path="/watch" element={<ParrentWatch/>}/>
+            <Route path="/activity" element={<Activity/>}/>
 
             <Route element={<PrivateRoute />}/>
             <Route path='/dashboard' element={<DashBoard/>}/>
