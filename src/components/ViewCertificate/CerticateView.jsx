@@ -84,9 +84,3 @@ const CerticateView = ({ value }) => {
 }
 
 export default CerticateView
-
-
-
-
-
-
