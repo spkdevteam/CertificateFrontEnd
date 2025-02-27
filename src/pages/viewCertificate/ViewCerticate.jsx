@@ -11,7 +11,7 @@ const ViewCertificate = () => {
     }, [selectedCertificate])
 
     return (
-        <div className="w-full h-full flex justify-center items-center">
+        <div className="w-full h-full bg-white flex justify-center overflow-scroll items-center">
             <div className="lg:container flex flex-col gap-2">
 
                 <div className="w-full h-20 rounded-md shadow-xl  ">
@@ -22,10 +22,8 @@ const ViewCertificate = () => {
 
                     <LandingPageCertificate />
                 </div>
-                <div className="w-full h-full  rounded-md shadow-xl  ">
+                <div className="w-full   rounded-md shadow-xl  ">
                     <CerticateView value={selectedCertificate} />
-
-
                 </div>
 
 

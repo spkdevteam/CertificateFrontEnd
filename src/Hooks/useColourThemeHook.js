@@ -6,7 +6,7 @@ const useColourThemeHook = () => {
     const currentTheme = useSelector((state) => state.theme.theme)
     const dispatch = useDispatch()
     const [theme, setTheme] = useState({
-        bgcolour: ' bg-opacity-10 bg-blue-100  ',
+        bgcolour: '  bg-blue-100  ',
         textColour: 'text-blue-500 hover:text-white',
         bordercolour: 'border-opacity-30 border-blue-500 '
     })
@@ -29,55 +29,55 @@ export default useColourThemeHook
 
 const themeSet = {
     normal: {
-        bgcolour: ' bg-opacity-10 bg-white  ',
+        bgcolour: '  bg-white  ',
         textColour: 'text-gray-500 hover:text-cyan-900',
         bordercolour: 'border-opacity-30 border-cyan-300     hover:'
     },
 
     ocean: {
-        bgcolour: ' bg-opacity-10 bg-blue-700  ',
+        bgcolour: '  bg-blue-700  ',
         textColour: 'text-blue-500   ',
         bordercolour: 'border-opacity-30 border-blue-500 hover:'
     },
 
     sunset: {
-        bgcolour: ' bg-opacity-10 bg-orange-100  ',
+        bgcolour: '  bg-orange-100  ',
         textColour: 'text-orange-500   ',
         bordercolour: 'border-opacity-30 border-orange-500  '
     },
 
     midnight: {
-        bgcolour: ' bg-opacity-10 bg-gray-900  ',
+        bgcolour: '  bg-gray-900  ',
         textColour: 'text-gray-200   ',
         bordercolour: 'border-opacity-30 border-gray-700    '
     },
 
     emerald: {
-        bgcolour: ' bg-opacity-10 bg-green-100  ',
+        bgcolour: '  bg-green-100  ',
         textColour: 'text-green-500   ',
         bordercolour:  'border-opacity-30  border-green-600  '
     },
 
     royal: {
-        bgcolour: ' bg-opacity-10 bg-purple-100  ',
+        bgcolour: '  bg-purple-100  ',
         textColour: 'text-purple-500   ',
         bordercolour:  'border-opacity-30  border-purple-500   '
     },
 
     cyberpunk: {
-        bgcolour: ' bg-opacity-10 bg-gray-900   ',
+        bgcolour: '  bg-gray-900   ',
         textColour: 'text-pink-500 hover:text-black',
         bordercolour:  'border-opacity-30  border-pink-500  '
     },
 
     lava: {
-        bgcolour: ' bg-opacity-10 bg-red-100 hover: ',
+        bgcolour: '  bg-red-100 hover: ',
         textColour: 'text-red-500   ',
         bordercolour:  'border-opacity-30  border-red-500   '
     },
 
     frosty: {
-        bgcolour: ' bg-opacity-10 bg-blue-100  ',
+        bgcolour: '  bg-blue-100  ',
         textColour: 'text-blue-500   ',
         bordercolour: ' border-opacity-30  border-blue-600 '
     }

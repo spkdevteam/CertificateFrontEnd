@@ -4,10 +4,10 @@ import gold2 from '../../assets/images/all-img/gold2.png';
 const  LandingPageCertificate = ()=> {
     return (
         <div>
-            <div className="mt-3 md:px-14 md:ml-14 flex items-center justify-between">
+            <div className=" p-4  flex  items-center justify-between">
                 <img src={gold} className="w-[70px] md:w-[93px] ml-2 md:ml-0" />
                 <div className="mr-3 md:mr-16">
-                    <button className="bg-[#b98f2d] text-white px-3 py-1 md:px-4 md:py-2 text-base md:text-xl font-poppins">
+                    <button className="bg-[#b98f2d]  text-white px-3 py-1 md:px-4 md:py-2 text-base md:text-xl font-poppins">
                         Back to site
                     </button>
                 </div>
@@ -17,7 +17,7 @@ const  LandingPageCertificate = ()=> {
                 <hr className="mt-2 mx-3 md:mx-12" />
             </div>
 
-            <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+            <div className="container  mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
                 <div className="p-6 md:col-span-1 flex justify-center order-1 md:order-2 mr-6">
                     <img src={gold2} alt="gold_image" className="w-[450px] sm:w-[200px] md:w-[420px] lg:w-[280px] max-w-full bg-cover bg-center" />
                 </div>

@@ -121,7 +121,7 @@ function App() {
 
   return (
     <>
-      <main className={`${isDark ? "bg-darkBody text-white" : "bg-lightBody"}  `} style={{ width: "100vw", height: "100vh", overflowX: "hidden", overflowY: "hidden" }}>
+      <main className={`${isDark ? "bg-darkBody text-white" : "bg-lightBody"}  `} style={{ width: "100vw", height: "h-screen", overflowX: "hidden", overflowY: "hidden" }}>
         <ToastContainer position='top-center' />
       {/* {vieModal && <MyModal DisplayPage='newAppointment' />} */}
         <Routes>
