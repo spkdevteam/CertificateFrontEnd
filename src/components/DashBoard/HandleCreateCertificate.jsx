@@ -7,6 +7,8 @@ import SPKInputText from '../../common/Input/SPKInputText';
 import useCertificatehook from '../../Hooks/useCertificateHooks';
 import SPKNumberInput from '../../common/Input/SPKNumberInput';
 import SPKBTNLoading from '../../common/Button/SPKBTNLoading';
+import SPKColumnDiv from '../../common/SPKDIV/spkColumdiv';
+import SPKRowDiv from '../../common/SPKDIV/SPKDIv';
 
 function HandleCreateCertificate({ value, onChange }) {
   const { formData,setFormDate,createOrEditCertificate,updateDataTable} = useCertificatehook()
@@ -41,27 +43,27 @@ function HandleCreateCertificate({ value, onChange }) {
   }, [value])
 
   return (
-    <div className='w-full h-full p-6   '>
-      <div className='border bg-white p-6 rounded-lg shadow-md flex flex-col gap-6'>
-        <h2 className='text-2xl font-semibold text-gray-800 border-b pb-2'>Certificate Details {formData?.displayId || ''}</h2>
+    <div className='w-full bg-white  bg-opacity-5 rounded-md    shadow-md  '>
+      <div className='    p-6   flex flex-col gap-6'>
+        <h2 className='  font-semibold text-gray-800     pb-2'>Certificate Details {formData?.displayId || ''}</h2>
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           <div className='flex flex-col gap-2'>
-            <label className='text-gray-700 font-medium'>Certificate Number</label>
-            <SPKInputText value={formData.certificateNumber} name={'certificateNumber'} onChange={handleChange} className='border  p-2  ' />
+            <label className='text-gray-700 text-sm '>Certificate Number</label>
+            <SPKInputText value={formData.certificateNumber} name={'certificateNumber'} onChange={handleChange} className='border border-inherit  p-2  ' />
+          </div>
+          <div className='flex flex-col gap-2  '>
+            <label className='text-gray-700 font-medium'>Fineness</label>
+            <SPKNumberInput value={formData.goldFineness} name={'goldFineness'} onChange={handleChange} className='border border-inherit   p-2  ' />
           </div>
           <div className='flex flex-col gap-2'>
-            <label className='text-gray-700 font-medium'>goldFineness</label>
-            <SPKNumberInput value={formData.goldFineness} name={'goldFineness'} onChange={handleChange} className='border  p-2  ' />
-          </div>
-          <div className='flex flex-col gap-2'>
-            <label className='text-gray-700 font-medium'>goldWeight</label>
-            <SPKNumberInput value={formData.goldWeight} name={'goldWeight'} onChange={handleChange} className='border  p-2  ' />
+            <label className='text-gray-700 font-medium'>Weight</label>
+            <SPKNumberInput value={formData.goldWeight} name={'goldWeight'} onChange={handleChange} className='border border-inherit   p-2  ' />
           </div>
         </div>
       </div>
 
-      <div className='w-full flex gap-4 justify-end items-center mt-6'>
+      <div className='w-full flex gap-4 justify-end items-center p-4 '>
         {
           formData?._id && !isloading
             ? <SPKBTNEdit onClick={() => {createOrEditCertificate(formData);setIsLoading(true) }} text='Edit' />

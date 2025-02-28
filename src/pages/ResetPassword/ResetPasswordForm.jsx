@@ -41,7 +41,7 @@ const ResetPasswordForm = ({ formData, setFormData }) => {
 
             });
             if (result?.status) {
-                toast.success(result?.message)
+                toast.success(result?.data?.message)
                 navigate("/staff/login")
             }
             else {

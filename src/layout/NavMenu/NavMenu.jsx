@@ -5,14 +5,8 @@ import useDarkmode from "../../Hooks/useDarkMode";
 import ResposiveNavbar from "../ResponsiveNavbar/ResposiveNavbar";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { removePatientDetail } from "../../store/reducer/currentPatient/currentPatient";
-import { updateMenu } from "../../store/menuSlice";
-import CreatePatient from "../../pages/Patients/CreatePatient";
-import { Dialog, Transition } from "@headlessui/react";
-import Icons from "../../components/ui/Icon";
- 
-import { div } from "framer-motion/client";
+import { useLocation, useNavigate } from "react-router-dom"; 
+  
 import DynamicNavMenu from "./DynamicNavMenu";
 import useHandleUserHook from "../../Hooks/userHook";
 

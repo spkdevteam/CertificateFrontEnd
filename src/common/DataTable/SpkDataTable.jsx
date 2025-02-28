@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import GloabalLoading from "../globalLoader/GloabalLoading";
 import useDarkmode from "../../Hooks/useDarkMode";
+import useColourThemeHook from "../../Hooks/useColourThemeHook";
 
 
 const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { }, showSummary = false, columns = [], subHeaderComponent, pagination = true, updateTable = 0, subHeader = false }) => {
-
+    const {theme} =  useColourThemeHook()
     // Component: SpkDataTable
     // Description: A reusable data grid component built with react-data-table-component, featuring dynamic data fetching, pagination, custom styling, dark mode support, and expandable rows.
     // Props:
@@ -165,8 +166,8 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
         },
         headRow: {
             style: {
-                color: isDark ? "rgb(200, 200, 200)" : "rgb(71, 85, 105)",
-                backgroundColor: isDark ? "#007475" : "#C9FEFF",
+                color: `${theme.textColour}`,
+                backgroundColor: `${theme.bgcolour}`,
             },
         },
         headCells: {
