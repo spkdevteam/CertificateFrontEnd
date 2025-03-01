@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import "./ForgotPasswordPage.css"
-// import bgImg from "../../assets/images/all-img/bgImg.png";
-// import logo from "../../assets/images/logo/Logo.png";
-// import wavingHand from "../../assets/images/logo/waving-hand.png";
 import { IoPerson } from "react-icons/io5";
 import { Profile, SmsSearch, ArrowCircleLeft } from 'iconsax-react';
-// import overlay from "../../assets/images/all-img/overlay.png"
 import { Link, useNavigate } from "react-router-dom";
 import useWidth from "../../Hooks/useWidth";
 import useDarkmode from "../../Hooks/useDarkMode";
@@ -21,86 +17,11 @@ const ForgotPasswordPage = ({formData,setFormData,loading,sendOtp}) => {
     const [isDark] = useDarkmode();
     const dispatch = useDispatch();
     const [isViewed, setIsViewed] = useState(false);
-    // const [loading, setLoading] = useState(false)
     const [showAddButton, setShowAddButton] = useState(true)
 
 
     const [isPasswordVissible, setIsPasswordVissile] = useState(false);
     const navigate = useNavigate()
-    // const [formData, setFormData] = useState({
-    //     identifier: ""
-    // })
-    // const { identifier } = formData
-    // const [formDataErr, setFormDataErr] = useState({
-    //     identifier: ""
-    // })
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target
-    //     if (name == "identifier") {
-    //         if (value == "") {
-    //             setFormDataErr((prev) => ({
-    //                 ...prev,
-    //                 identifier: "Email or Phone No. Is Required",
-    //             }));
-    //         } else {
-    //             setFormDataErr((prev) => ({
-    //                 ...prev,
-    //                 identifier: "",
-    //             }));
-    //         }
-    //     }
-
-    //     setFormData((prev) => ({
-    //         ...prev,
-    //         [name]: value
-    //     }))
-    // }
-
-    // ----- Applying Validation ----------
-    // function validationFunction() {
-    //     if (!identifier) {
-    //         setFormDataErr((prev) => ({
-    //             ...prev,
-    //             identifier: "Email or Phone No. Is Required",
-    //         }));
-    //     } else {
-    //         setFormDataErr((prev) => ({
-    //             ...prev,
-    //             identifier: "",
-    //         }));
-    //     }
-
-    // }
-
-    // const onSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setIsViewed(false);
-    //     setLoading(true)
-    //     validationFunction();
-    //     if (!identifier) {
-    //         toast.error("Enter Your Email");
-    //         setLoading(false)
-
-    //         return;
-    //     }
-    //     try {
-    //         const data = formData
-    //         const response = await authService.forgotPassword(data);
-    //         console.log("response", response)
-    //         toast.success(response.data.message);
-
-    //         if (response.status == 200) {
-    //             // let email = data.email.split(".");
-    //             navigate("/resetpasswordPage", { state: { identifier } })
-    //             setLoading(false)
-    //         }
-    //     } catch (error) {
-    //         toast.error(error?.response?.data?.message);
-    //         setLoading(false)
-
-    //     }
-    // };
 
 
     return (
@@ -108,9 +29,6 @@ const ForgotPasswordPage = ({formData,setFormData,loading,sendOtp}) => {
 
             <div className="flex justify-center items-center  group  w-full h-[100%] bg-gradient-to-br">
 
-                {/* <div
-                    class="circle absolute  h-[157vh] w-[105vw] top-[-12.5em] right-[-42.5em]  bg-[#4CB8C4]/50  duration-500 z-[99] op"
-                ></div> */}
                 <div className="absolute">
                     <img src="https://t4.ftcdn.net/jpg/04/91/47/35/360_F_491473567_gIr3ndIFtW2Cd5GD5UnG0tNXVgK7g25J.jpg" alt="" className="w-[110vw] h-[130vh]" />
                 </div>
@@ -119,7 +37,6 @@ const ForgotPasswordPage = ({formData,setFormData,loading,sendOtp}) => {
                 <div className="bg-white/20 ml-11 z-[999999] backdrop-blur-lg shadow-lg border border-[#FFFFFF]/70 rounded-3xl p-8 max-w-lg h-auto">
                     {/* Logo */}
                     <div className="flex justify-center">
-                        {/* <img src={logo} alt="Company Logo" className="" /> */}
                     </div>
 
                     {/* Heading */}

@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import "./ResetPasswordPage.css"
-// import bgImg from "../../assets/images/all-img/bgImg.png";
-// import logo from "../../assets/images/logo/Logo.png";
-// import wavingHand from "../../assets/images/logo/waving-hand.png";
 import { IoPerson } from "react-icons/io5";
 import { Profile, SmsSearch, ArrowCircleLeft, Key, EyeSlash, Eye } from 'iconsax-react';
-// import overlay from "../../assets/images/all-img/overlay.png"
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useDarkmode from "../../Hooks/useDarkMode";
 import toast from "react-hot-toast";
@@ -90,17 +86,6 @@ const ResetPasswordPage = ({formData,setFormData}) => {
 
 
     function validationFunction() {
-        // if (!otp) {
-        //     setFormDataErr((prev) => ({
-        //         ...prev,
-        //         otp: "OTP is Required",
-        //     }))
-        // } else {
-        //     setFormDataErr((prev) => ({
-        //         ...prev,
-        //         otp: "",
-        //     }))
-        // }
         if (!password) {
             setFormDataErr((prev) => ({
                 ...prev,
@@ -156,13 +141,17 @@ const ResetPasswordPage = ({formData,setFormData}) => {
             console.log("response", response);
             setLoading(false)
 
-            if (response?.status) {
+            if (response?.data?.status) {
+            
                 toast.success(response?.data?.message)
                 navigate("/staff/login")
             }
+            else{
+                toast.error(response?.data?.message)
+            }
         } catch (error) {
             setLoading(false)
-            toast.error(error?.response?.data?.message);
+            toast.error(response?.data?.message);
         }
     };
 
@@ -211,26 +200,6 @@ const ResetPasswordPage = ({formData,setFormData}) => {
 
                     <form onSubmit={onSubmit}>
 
-                        {/* Input Fields */}
-                        {/* <div className="mt-6 relative ">
-                            <input
-                                name="identifier"
-                                type="email"
-                                value={identifier}
-                                className="w-full mt-1 px-10 py-2 placeholder-black/50 bg-[white]/10 border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-black"
-                                placeholder="Email or phone"
-                                readOnly
-                            />
-                            <div className="absolute top-4 px-2">
-                                <SmsSearch color="#697689" className="text-lg" />
-                            </div>
-
-                             {
-                                                    <p className="text-sm mt-1 text-red-500">
-                                                        {formDataErr.identifier}
-                                                    </p>
-                                                } 
-                        </div> */}
 
                         <div className="mt-4 relative ">
                             <input
@@ -241,9 +210,6 @@ const ResetPasswordPage = ({formData,setFormData}) => {
                                 className="w-full mt-1 px-10 py-2 placeholder-black/50 bg-[white]/10 border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-black"
                                 placeholder="Enter otp"
                             />
-                            {/* <div className="absolute top-4 px-2">
-                            <SmsSearch color="#697689" className="text-lg" />
-                        </div> */}
 
                             {
                                 <p className="text-sm mt-1 text-red-500">

@@ -1,7 +1,5 @@
-import React, { memo, useEffect, useState,useRef } from 'react';
-// import img from "../../assets/images/logo/Kosmo-Clinic-Logo.svg"
+import React, { memo, useEffect, useState, useRef } from 'react';
 import img from "../../assets/images/icon/image-office.jpg"
-
 import useWidth from '../../Hooks/useWidth';
 import useDarkmode from '../../Hooks/useDarkMode';
 import ForgotPasswordForm from './ForgotPasswordForm';
@@ -19,15 +17,15 @@ const ForgotPassword = () => {
     const [isDark] = useDarkmode();
     const { forgotUser, otpUser } = useHandleUserHook()
     const [loading, setLoading] = useState(false)
-    const[otpArray,setOtpArray]=useState(["","","","","",""]) // OTP array
-    const otpInputs=Array(6).fill(0).map(()=>useRef(null)) //Refs for otp input
+    const [otpArray, setOtpArray] = useState(["", "", "", "", "", ""]) // OTP array
+    const otpInputs = Array(6).fill(0).map(() => useRef(null)) //Refs for otp input
 
     const [formData, setFormData] = useState({
         email: '',
         password: '',
         otp: '',
         _id: '',
-        confirmPassword:""
+        confirmPassword: ""
     });
 
     const [formDataError, setFormDataError] = useState({});
@@ -43,12 +41,12 @@ const ForgotPassword = () => {
         const newOtpArray = [...otpArray];
         newOtpArray[index] = value;
         setOtpArray(newOtpArray);
-        setFormData((prev) => ({ ...prev, otp: newOtpArray.join("")+"" }));
+        setFormData((prev) => ({ ...prev, otp: newOtpArray.join("") + "" }));
         // console.log(formData)
         console.log("OTP updated:", newOtpArray.join("")); // Debugging line
 
 
-        
+
 
         if (value && index < 5) {
             otpInputs[index + 1].current.focus();
@@ -92,8 +90,8 @@ const ForgotPassword = () => {
     }
 
     const verifyOtp = async () => {
-        console.log("verifiying otp",formData?.otp)
-        if (!formData?.otp.trim() || formData?.otp.length!==6) {
+        console.log("verifiying otp", formData?.otp)
+        if (!formData?.otp.trim() || formData?.otp.length !== 6) {
             toast.error("Enter a valid 6-digit OTP");
             return;
         }
@@ -106,11 +104,11 @@ const ForgotPassword = () => {
             console.log(result, "World")
             if (result?.data?.status) {
                 toast.success(result?.data?.message)
-               setTimeout(() => {
-                setPasswordUpdateStages(3)
+                setTimeout(() => {
+                    setPasswordUpdateStages(3)
 
-                
-               },1000);
+
+                }, 1000);
             }
             else {
                 toast.error("Otp field is empty")
@@ -122,66 +120,47 @@ const ForgotPassword = () => {
         setLoading(false)
     }
 
- return (
+    return (
         <div className='border min-h-screen m-auto items-center w-full flex justify-center '>
             {
                 passwordUpdateStages === 1 && (
-                   
-                    <ForgotPasswordPage
-                     formdata={formData}
-                     setFormData={setFormData}
-                     sendOtp={sendOtp}
-                     loading={loading}
-                    
-                    />
-                    // <ForgotPasswordForm
-                    //     formData={formData}
-                    //     setFormData={setFormData}
-                    //     sendOtp={sendOtp}
-                    //     loading={loading}
 
-                    // />
+                    <ForgotPasswordPage
+                        formdata={formData}
+                        setFormData={setFormData}
+                        sendOtp={sendOtp}
+                        loading={loading}
+
+                    />
                 )
             }
             {
                 passwordUpdateStages === 2 && (
-                    // <Otp
-                    //     formData={formData}
-                    //     setFormData={setFormData}
-                    //     verifyOtp={verifyOtp}
-                    //     loading={loading}
-
-                    // />
-
                     <OtpVerifyPage
-                     formData={formData}
-                     setFormData={setFormData}
-                     verifyOtp={verifyOtp}
-                     loading={loading}
-                     otpArray={otpArray}
-                     otpInputs={otpInputs}
-                     handleOtpChange={handleOtpChange}
-                     handleOtpKeyDown={handleOtpKeyDown}
- 
-                    
+                        formData={formData}
+                        setFormData={setFormData}
+                        verifyOtp={verifyOtp}
+                        loading={loading}
+                        otpArray={otpArray}
+                        otpInputs={otpInputs}
+                        handleOtpChange={handleOtpChange}
+                        handleOtpKeyDown={handleOtpKeyDown}
+
+
                     />
                 )
             }
             {
                 passwordUpdateStages === 3 && (
-                    // <ResetPassword
-                    //     formData={formData}
-                    //     setFormData={setFormData}
-                    // />
 
                     <ResetPasswordPage
-                     formData={formData}
-                     setFormData={setFormData}
+                        formData={formData}
+                        setFormData={setFormData}
                     />
                 )
             }
 
- </div>
+        </div>
 
     );
 };

@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import deleteCertificate from "../services/certificate/deleteCertificate";
 import confirmAction from "../common/Toast/confirmAction";
 import getcertificateBycertificateNumber from "../services/certificate/getcertificateBycertificateNumber";
+import getCertificateBySuggestion from "../services/certificate/getCertificateBySuggestion";
 
 
 const useCertificatehook = () => {
@@ -131,9 +132,16 @@ const useCertificatehook = () => {
        }
     }
 
+    const searchCertificate=async({searchKey})=>{
+        const response=await getCertificateBySuggestion({searchKey})
+        console.log(response?.data)
+        return response?.data
+
+    }
 
 
-    return { createOrEditCertificate, formData, getCertificateLIst, setFormDate, updateDataTable,deleteCertificateById,viewCertificate,selectedCertificate }
+
+    return { createOrEditCertificate, formData, getCertificateLIst, setFormDate, updateDataTable,deleteCertificateById,viewCertificate,selectedCertificate,searchCertificate }
 }
 
 

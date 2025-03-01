@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useCertificatehook from "../../Hooks/useCertificateHooks";
 import image2 from "../../assets/images/certificate/SAUDHI.png";
+import image3 from "../../assets/images/certificate/Emirates.png"
 
 const CertificateView = ({ value }) => {
   useEffect(() => {
@@ -17,9 +18,9 @@ const CertificateView = ({ value }) => {
 
   return (
     <div className="relative flex justify-center items-center">
-      <img src={image2} alt="Certificate" className="w-full h-auto object-cover" />
+      <img src={image3} alt="Certificate" className="w-full h-auto object-cover" />
 
-      <div className="absolute flex flex-col w-full  items-center space-y-1 bg-opacity-50 px-4 mt-5 rounded">
+      <div className="absolute flex flex-col w-full  items-center space-y-1 bg-opacity-50 px-4 mt-0 rounded">
         <div className="flex flex-col  w-full space-y-0 leading-none text-center pt-[5px]">
           <div className="flex w-full " >
             <p className="text-black font-light text-[8px] md:text-lg lg:text-lg text-end w-full xl:text-xl">
@@ -50,11 +51,11 @@ const CertificateView = ({ value }) => {
           </div>
         </div>
 
-        <div className="w-full justify-center flex ">
+        {/* <div className="w-full justify-center flex ">
           <p className="text-black w-1/2 text-end font-light text-[8px] md:text-lg lg:text-lg xl:text-xl ">Certified Assayer:</p>
           <p className="text-black w-1/2 text-start font-light text-[8px] md:text-lg lg:text-lg xl:text-xl "></p>
 
-        </div>
+        </div> */}
 
         {/* <div className="w-full items-center flex flex-col  relative">
         <p className="text-[#B5945F] font-light w-full text-center text-[8px] md:text-lg lg:text-lg xl:text-xl absolute top-[15px] md:top-[30px]">
