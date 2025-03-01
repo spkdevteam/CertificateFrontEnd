@@ -104,38 +104,38 @@ const useCertificatehook = () => {
 
     const viewCertificate= async ({certificateNumber})=>{
        try {
+
+
         const confirmView = await confirmAction(`View certificate ${certificateNumber}`)
         if (confirmView){
             const result = await getcertificateBycertificateNumber({certificateNumber})
+            console.log(result?.data,"hello world")
             if (result?.status){
-                toast.success(result?.message)
                 return result?.data?.certificate
                
 
             }
             else{
-                toast.error(result?.message)
-                return  {
-                    _id: "",
-                    displayId: "",
-                    certificateNumber: "",
-                    goldFineness: 0,
-                    goldWeight: 0,
-                }
+                toast.error("Certificate not found!");
+                console.log("Certificate not found, triggering toast");
+
+
+                return null;
             }
 
         }
         
 
        } catch (error) {
+        toast.error(error.message)
+        return null
         
        }
     }
 
     const searchCertificate=async({searchKey})=>{
         const response=await getCertificateBySuggestion({searchKey})
-        console.log(response?.data)
-        return response?.data
+        return response
 
     }
 
