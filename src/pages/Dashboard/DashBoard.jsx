@@ -9,6 +9,8 @@ import SPKBTNThemedDelete from "../../common/Button/OutlineThemeButton/SPKBTNThe
 import HandleCreateCertificate from "../../components/DashBoard/HandleCreateCertificate";
 import useColourThemeHook from "../../Hooks/useColourThemeHook";
 import ColourThemeSelector from "../ThemePage/colourTheme";
+import ExcelSheetIntegration from "./ExcelSheetIntegration";
+import HowToIntegrate from "./HowToIntegrate";
 
 const DashBoard = () => {
     const { getCertificateLIst, updateDataTable, deleteCertificateById } = useCertificatehook();
@@ -78,6 +80,9 @@ const DashBoard = () => {
                     {/* Certificate Creation Component */}
                     <div className="w-full rounded-md overflow-hidden text-inherit shadow-lg p-4">
                         <HandleCreateCertificate value={selectedCertificate} onUpdate={updateDataTable} />
+                        <div className = 'h-80    '>
+                            <HowToIntegrate/>
+                        </div>
                     </div>
 
                     {/* Data Table Component */}
