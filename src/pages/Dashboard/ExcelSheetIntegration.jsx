@@ -107,6 +107,7 @@ function Excel() {
         </label>
       
         {fileUploaded && (
+            
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 w-full">
             <div>
               <h3 className="text-sm font-semibold text-gray-700 mb-2">Select Main Field</h3>
