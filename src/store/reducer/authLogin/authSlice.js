@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const storedAdmin = JSON.parse(localStorage.getItem("KOSMO_client_adminInfo"));
 
 
@@ -23,3 +24,18 @@ export const authSlice = createSlice({
 
 export const { setClientUser, logOut } = authSlice.actions;
 export default authSlice.reducer;
+
+//  const authSlice=createSlice({
+//   name:"auth",
+//   initialState:{
+//     userName:null
+//   },
+//   reducers:{
+//     setUser:(state,action)=>{
+//       state.userName=action?.payload
+//     }
+//   }
+// })
+
+// export const {setUser}=authSlice.actions
+// export default authSlice.reducer

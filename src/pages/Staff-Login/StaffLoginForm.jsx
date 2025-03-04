@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { ToastContainer } from "react-toastify";
 import SPKBaseBTN from "../../common/Button/SPKBaseBTN";
 import { SPKBTNSubmitAndAdd } from "../../common/Button/SPKBTNSubmitAndAdd";
+import { useDispatch } from "react-redux";
 
 const StaffLoginForm = () => {
     const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ const StaffLoginForm = () => {
         userName: ''
     })
     const { loginUser } = useHandleUserHook()
+    const dispatch=useDispatch()
 
     const [errors, setErrors] = useState({});
     const navigate = useNavigate()
@@ -51,8 +53,10 @@ const StaffLoginForm = () => {
             else {
 
                 const result = await loginUser({email: formData.email, password: formData.password })
-                console.log(result)
+            
                 if (result?.status===true) {
+                    const userName=result?.data?.userName?.userId
+                    console.log(userName,"userName")
                     toast.success(result?.message)
                     navigate('/dashboard')
                 }

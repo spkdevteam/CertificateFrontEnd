@@ -7,32 +7,46 @@ const ViewCertificate = () => {
     const [selectedCertificate, setSelectedCertificate] = useState(null)
     const{viewCertificate}=useCertificatehook()
 
-    const handleSelecteCertificate=async(certificateNumber)=>{
 
-     try {
-        const certificateDetails=await viewCertificate({certificateNumber})
-        if(certificateDetails){
-            console.log("Certificate Details:",certificateDetails)
-            setSelectedCertificate(certificateDetails)
-        }
-        else{
-            console.log("No certificate found for:", certificateNumber);
-            setSelectedCertificate(null);  // Ensure UI updates correctly
+   const handleSelecteCertificate = async (certificateNumber) => {
+    console.log("certificateNumberParent",certificateNumber);
+    
+        if (!certificateNumber) return; // Prevent empty calls
+        
+        console.log("API Call Triggered for Certificate:", certificateNumber); // Debugging
 
+    
+          
 
-        }
-
-            
+        try {
+            const certificateDetails = await viewCertificate({ certificateNumber });
+    
+            if (certificateDetails) {
+                console.log("Certificate Details:", certificateDetails);
+                setSelectedCertificate(certificateDetails);
+            } else {
+                console.log("No certificate found for:", certificateNumber);
+                setSelectedCertificate(null);
+            }
         } catch (error) {
-            console.log("Error fetching certificate details:",error)
-            
+            console.error("Error fetching certificate details:", error);
         }
+    };
+    
+//    useEffect(() => {
+//         if (selectedCertificate && selectedCertificate.certificateNumber) {
+//             console.log(selectedCertificate, "Selected Certificate Updated");
+//         }
+//     }, [selectedCertificate]);
 
+useEffect(() => {
+    if (selectedCertificate?.certificateNumber) {
+        console.log("Selected Certificate Updated:", selectedCertificate);
     }
+}, [selectedCertificate?.certificateNumber]); // ✅ Now only runs when certificateNumber changes
 
-    useEffect(() => {
-        console.log(selectedCertificate, "Selected Certificate Updated");
-    }, [selectedCertificate]);
+    
+    
 
 
     return (

@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import logoIcon from "../../assets/images/icon/credentials-icon.webp"
 import authService from "../../services/auth.Service";
 import useHandleUserHook from "../../Hooks/userHook";
+import { setClientUser } from "../../store/reducer/authLogin/authSlice";
 
 
 
@@ -61,8 +62,11 @@ const LoginPage = () => {
             else {
 
                 const result = await loginUser({ email: formData.email, password: formData.password })
-                console.log(result)
+               
                 if (result?.status === true) {
+                    const userName=result?.data?.userName?.userId 
+                    console.log(userName,"userName")
+                    dispatch(setClientUser(userName))
                     toast.success(result?.message)
                     navigate('/dashboard')
                 }

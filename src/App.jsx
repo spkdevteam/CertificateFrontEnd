@@ -73,7 +73,7 @@ import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 import StaffLogin from './pages/Staff-Login/StaffLogin';
 import StaffForgotPassword from './pages/Staff-ForgotPassword/StaffForgotPassword';
 import StaffResetPassword from './pages/Staff-ResetPassword/StaffResetPassword';
-import StaffOtpVerify from './pages/Staff-OtpVerify/StaffOtpVerify';
+// import StaffOtpVerify from './pages/Staff-OtpVerify/StaffOtpVerify';
 // import PatientAppointment from './pages/PatientDetail/PatientInvoice/patientAppointment/PatientAppointment';
 import DashboardTwo from './pages/DashboardTwo/DashboardTwo';
 import { ToastContainer } from 'react-toastify';
@@ -123,7 +123,7 @@ function App() {
   return (
     <>
       <main className={`${isDark ? "bg-darkBody text-white" : "bg-lightBody"}  `} style={{ width: "100vw", height: "h-screen", overflowX: "hidden", overflowY: "hidden" }}>
-        <ToastContainer position='top-center' />
+        <ToastContainer position='top-center' /> 
       {/* {vieModal && <MyModal DisplayPage='newAppointment' />} */}
         <Routes>
             
@@ -134,12 +134,12 @@ function App() {
               <Route path="/staff/login" element={<StaffLogin />} />
               <Route path="/forgotpassword" element={<ForgotPassword />} />
               <Route path="/staff/forgotpassword" element={<StaffForgotPassword />} />
-              <Route path="/signinbyotp" element={<OtpVerify />} />
-              <Route path="/staff/signinbyotp" element={<StaffOtpVerify />} />
+              {/* <Route path="/signinbyotp" element={<OtpVerify />} /> */}
+              {/* <Route path="/staff/signinbyotp" element={<StaffOtpVerify />} /> */}
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/staff/resetpassword" element={<StaffResetPassword />} />
             <Route path='/forgotpassword' element={<ForgotPasswordForm/>}/>
-              <Route path='/dashboard' element={<DashBoard/>}/>
+              {/* <Route path='/dashboard' element={<DashBoard/>}/> */}
               <Route path='/viewCertificate' element={<ViewCertificate/>}/>
 
             <Route path="/watch" element={<ParrentWatch/>}/>
@@ -241,7 +241,7 @@ function App() {
             </Route>
             </Route>
             </Route>
-          <Route path="*" element={<DashBoard />} />
+          {/* <Route path="*" element={<DashBoard />} /> */}
 
         </Routes>
 

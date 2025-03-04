@@ -16,15 +16,16 @@ const  LandingPageCertificate = ()=> {
             <div className=" md:mx-16">
                 <hr className="mt-2 mx-3 md:mx-12" />
             </div>
-
-            <div className="container  mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+            
+            <div className='min-h-screen flex flex-col justify-center'>
+            <div className="container  mx-auto grid grid-cols-1 md:grid-cols-[1.3fr_1fr] large:grid-cols-2 max-w-full gap-6 px-4">
                 <div className="p-6 md:col-span-1 flex justify-center order-1 md:order-2 mr-6">
                     <img src={gold2} alt="gold_image" className="w-[450px] sm:w-[200px] md:w-[420px] lg:w-[280px] max-w-full bg-cover bg-center" />
                 </div>
 
-                <div className="md:ml-14 md:p-6 md:col-span-2 order-2 md:order-1">
+                <div className="md:ml-14 md:p-6   order-2 md:order-1">
                     <h2 className="font-bold text-xl md:text-2xl font-poppins">Instructions</h2>
-                    <p className="text-sm md:text-base mt-3 font-poppins">
+                    <p className="text-sm md:text-base  mt-3 font-poppins">
                         We are excited to introduce a new feature that will simplify the process of accessing your certificate details. Now, you can effortlessly obtain the information you need by following the below steps.
                     </p>
                     <ul className="font-bold text-sm md:text-base mt-5 ml-4 list-disc font-poppins">
@@ -41,6 +42,9 @@ const  LandingPageCertificate = ()=> {
                     </p>
                 </div>
             </div>
+
+            </div>
+
         </div>
     );
 }

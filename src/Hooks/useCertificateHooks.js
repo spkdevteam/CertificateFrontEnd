@@ -30,58 +30,57 @@ const useCertificatehook = () => {
     useEffect(() => {
         setUpdateDataTable(prev => prev + 1)
     }, [])
-    useEffect(()=>{
-        console.log(selectedCertificate,'selectedCertificate')
-    },[selectedCertificate])
+     
+    useEffect(() => {
+        if (selectedCertificate && Object.keys(selectedCertificate).length > 0) {
+            console.log(selectedCertificate, 'selectedCertificate');
+        }
+    }, [selectedCertificate]);
+    
 
 
 
 
     const getCertificateLIst = async ({ page, rowPerPage, keyWord }) => {
         const result = await getAllCertificate({ page, rowPerPage, keyWord })
+        
 
-        const { data, totalDocs: totalDataCount } = result
-        return { data, totalDataCount }
-    }
+        const { data, metaData } = result
+
+        return { data, totalDataCount:metaData?.totalDocs }
+    } 
+
     const createOrEditCertificate = async (inputData) => {
         const validateValue = mandateValue?.filter((val) => !inputData[val]?.length)
         if (validateValue.length) {
-            setUpdateDataTable(prev => prev + 1)
             toast.error(`${validateValue?.join(',')} is missing `)
+            return;
         }
-        else {
-            if (!inputData?._id?.length) {
-                const result = await postCreateCertificate({ certificateNumber: inputData.certificateNumber, goldFineness: inputData.goldFineness, goldWeight: inputData.goldWeight })
-                setUpdateDataTable(prev => prev + 1)
-                if (result?.status) {
-                    toast.success(result.message)
-                    setFormDate((prev) => ({
-                        ...prev,
-                        _id: result?.data?._id
-                    }))
-                }
-                else {
-                    toast.error(result.message)
-                }
-            }
-            else {
-                const result = await putUpdateCertificate({ certificateNumber: inputData.certificateNumber, goldFineness: inputData.goldFineness, goldWeight: inputData.goldWeight, _id: inputData?._id })
-                setUpdateDataTable(prev => prev + 1)
-                if (result?.status) {
-                    toast.success(result.message)
-                    setFormDate((prev) => ({
-                        ...prev,
-                        _id: result?.data?._id
-                    }))
-                }
-                else {
-                    toast.error(result.message)
-
-                }
-            }
+    
+        let result;
+        if (!inputData?._id?.length) {
+            result = await postCreateCertificate({
+                certificateNumber: inputData.certificateNumber, 
+                goldFineness: inputData.goldFineness, 
+                goldWeight: inputData.goldWeight
+            });
+        } else {
+            result = await putUpdateCertificate({
+                certificateNumber: inputData.certificateNumber, 
+                goldFineness: inputData.goldFineness, 
+                goldWeight: inputData.goldWeight, 
+                _id: inputData?._id
+            });
         }
-
-    }
+    
+        if (result?.status) {
+            toast.success(result.message);
+            setUpdateDataTable(prev => prev + 1); // ✅ This should trigger table refresh
+        } else {
+            toast.error(result.message);
+        }
+    };
+    
     const deleteCertificateById = async ({id,certificateNumber})=>{
         try {
             const confirmDelete = await confirmAction( `Delete certificate ${certificateNumber} `) 
@@ -102,36 +101,31 @@ const useCertificatehook = () => {
 
     }
 
-    const viewCertificate= async ({certificateNumber})=>{
-       try {
 
+    const viewCertificate = async ({ certificateNumber }) => {
+        try {
+            if (!certificateNumber) return null; // Prevents running on empty input
 
-        const confirmView = await confirmAction(`View certificate ${certificateNumber}`)
-        if (confirmView){
-            const result = await getcertificateBycertificateNumber({certificateNumber})
-            console.log(result?.data,"hello world")
-            if (result?.status){
-                return result?.data?.certificate
-               
+            const confirmView =  true
+            
 
-            }
-            else{
-                toast.error("Certificate not found!");
-                console.log("Certificate not found, triggering toast");
-
-
+            if (!confirmView) return null;
+    
+            const result = await getcertificateBycertificateNumber({ certificateNumber });
+    
+    
+            if (result?.status && result?.data?.certificate) {
+                return result.data.certificate;
+            } else {
+                toast.error(`Certificate ${certificateNumber} not found!`);
                 return null;
             }
-
+        } catch (error) {
+        
+            toast.error(error.message);
+            return null;
         }
-        
-
-       } catch (error) {
-        toast.error(error.message)
-        return null
-        
-       }
-    }
+    };
 
     const searchCertificate=async({searchKey})=>{
         const response=await getCertificateBySuggestion({searchKey})

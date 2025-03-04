@@ -8,8 +8,8 @@ import Checkbox from "../../components/ui/Checkbox";
 import useDarkmode from "../../Hooks/useDarkMode";
 import authService from "../../services/auth.Service";
 import toast from "react-hot-toast";
-import { setClientUser } from "../../store/reducer/authLogin/authSlice";
-import { setCapability } from "../../store/reducer/capability/capability";
+// import { setClientUser } from "../../store/reducer/authLogin/authSlice";
+// import { setCapability } from "../../store/reducer/capability/capability";
 
 const OtpVerifyForm = () => {
 

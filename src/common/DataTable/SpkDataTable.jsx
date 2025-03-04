@@ -30,13 +30,14 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
     const handlePageChange = async (page) => {
         try {
             setPending(true)
-            console.log(onChangePage,'onChangePage')
+            // console.log(onChangePage,'onChangePage')
 
             const response = await onChangePage({ page: page ? page - 1 : page, keyword: keyWord, rowPerPage: rowPerPage }) //isAdmin: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? true : false, branchId: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? null : currentUser?.branch 
             const { data, totalDataCount } = response;
 
             setInputArray(data);
             setTotalRows(totalDataCount);
+            setCurrentPage(page)
 
             setPending(false)
         } catch (error) {
@@ -52,6 +53,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
     useEffect(()=>{
         console.log(updateTable,'updateTableupdateTableupdateTableupdateTableupdateTable')
         handlePageChange(handlePageChange(1))
+        handlePageChange(1)
     },[updateTable])
 
 
@@ -91,6 +93,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
             setPending(true);
 
             const result = await onChangePage({ page: currentPage, rowPerPage: rowPerPage, keyword: keyWord })
+            // console.log("Fetched Data",result)
 
             const { data, totalDataCount } = result;
             let index = -1
@@ -104,7 +107,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
     };
     useEffect(() => {
         handlepagination()
-    }, [updateTable])
+    }, [updateTable,rowPerPage])
 
 
     const SummatyDataTableStyle = {

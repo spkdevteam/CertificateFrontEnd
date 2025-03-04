@@ -11,7 +11,7 @@ const handleAPiloginUser = async({email,password})=>{
 
     }
     const result=await hrApi.post(`/users/signin`,data)
-    console.log(result?.data)
+    // console.log(result?.data)
     return result?.data
 }
 

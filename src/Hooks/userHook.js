@@ -4,6 +4,7 @@ import handleAPiloginUser from "../services/user/loginUser"
 import handleForgotPassword from "../services/user/forgotPasswordUser"
 import handleOtp from "../services/user/otpUser"
 import handleReset from "../services/user/resetPasswordUser"
+import { useDispatch } from "react-redux"
 
 const userAuth = {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODIwODRkYTg0MGYzYTdiZjFhMmY3MiIsImVtYWlsIjoia2FzaWZidTJAeW9wbWFpbC5jb20iLCJpYXQiOjE3Mzk4MjE4NTcsImV4cCI6MTczOTkwODI1N30.HDzL5zVnfiMYNboGnkelTYT06g94Hi98XK6YTLRuiPM",
@@ -164,6 +165,7 @@ const userAuth = {
 
 const useHandleUserHook = () => {
     const [userSlice, setUserSlice] = useState(userAuth)
+    const dispatch=useDispatch()
     const [login, setLogin] = useState(false)
     const [isTokenValid, setTokenValid] = useState()
     const verifyTocken = ({ token }) => {
@@ -174,9 +176,10 @@ const useHandleUserHook = () => {
     }
 
     const loginUser = ({email,password}) => {
-
-        const result = handleAPiloginUser({email,password })
-        return result
+        
+            const result =handleAPiloginUser({email,password })
+        
+           return result
 
 
     }

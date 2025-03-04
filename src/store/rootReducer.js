@@ -24,7 +24,7 @@ import accountSlice from './accountsSlice'
 const rootReducer = {
 
     layout,
-    authSlice,
+    auth:authSlice,
     capabilitySlice,
     complaintSlice,
     currentPatientSlice,
