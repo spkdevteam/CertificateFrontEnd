@@ -12,6 +12,7 @@ import logoIcon from "../../assets/images/icon/credentials-icon.webp"
 import authService from "../../services/auth.Service";
 import useHandleUserHook from "../../Hooks/userHook";
 import { setClientUser } from "../../store/reducer/authLogin/authSlice";
+import { image1, loginPageImage } from "../../constant/images";
 
 
 
@@ -64,9 +65,9 @@ const LoginPage = () => {
                 const result = await loginUser({ email: formData.email, password: formData.password })
                
                 if (result?.status === true) {
-                    const userName=result?.data?.userName?.userId 
-                    console.log(userName,"userName")
-                    dispatch(setClientUser(userName))
+                    const userName=result?.data?.userName?.userId
+                    const userId=result?.data?._id
+                    dispatch(setClientUser({userName,userId}))
                     toast.success(result?.message)
                     navigate('/dashboard')
                 }
@@ -97,17 +98,18 @@ const LoginPage = () => {
     return (
         <div className="loginbgImage relative  w-[100%] h-[100vh] flex  items-center justify-center lg:justify-end">
 
-            <div className="flex justify-center items-center  group  w-full h-[100%] bg-gradient-to-br">
+            <div className="flex justify-end   items-center  group  w-full h-[100%] bg-gradient-to-br">
 
                 <div className="absolute">
-                    <img src="https://t4.ftcdn.net/jpg/04/91/47/35/360_F_491473567_gIr3ndIFtW2Cd5GD5UnG0tNXVgK7g25J.jpg" alt="" className="w-[110vw] h-[130vh]" />
+                    <img src={`${loginPageImage}`} alt="" className="w-[110vw] h-[130vh]" />
                 </div>
 
                 {/* Glassy Card */}
                 
 
-                    <div className="bg-white/20 ml-11 z-[999999] backdrop-blur-lg shadow-lg border border-[#FFFFFF]/70 rounded-3xl p-8 max-w-lg h-auto">
-
+                    <div className="bg-white/20 ml-11 me-10  w-full lg:w-3/12 md:w-6/12   z-[999999] backdrop-blur-lg shadow-lg border border-[#FFFFFF]/70 rounded-3xl p-8   h-auto">
+                         
+                         <img src={image1} alt="" className="w-6/12   p-2   " />
 
                         <form onSubmit={handleSubmit} >
                             {/* Input Fields */}
@@ -125,9 +127,7 @@ const LoginPage = () => {
                                     <Profile color="#697689" className="text-lg" />
                                 </div>
                                 {/* {
-            <p className="text-sm mt-1 text-red-500">
-                {formDataErr.identifier}
-            </p>
+          
         } */}
                             </div>
 
@@ -219,25 +219,7 @@ const LoginPage = () => {
                                 )}
 
                             </div>
-                            <div className="flex justify-end mb-6">
-                                {showAddButton ? (
-                                    <button
-                                        disabled={loading}
-                                        onClick={() => navigate("/staff/loginPage")}
-                                        style={
-                                            loading
-                                                ? { opacity: "0.5", cursor: "not-allowed" }
-                                                : { opacity: "1" }
-                                        }
-                                        className={` shadow-xl bg-white  py-2 rounded-full font-semibold  transition  w-32 inline-flex justify-center text-center`}
-                                    >
-                                        {"Staff Login"}
 
-                                    </button>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
                         </form>
 
 

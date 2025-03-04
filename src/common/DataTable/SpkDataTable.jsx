@@ -145,6 +145,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
         header: {
             style: {
                 color: isDark ? "rgb(203, 213, 225)" : "green",
+                
                 fontWeight: "bold",
                 backgroundColor: isDark ? "#007475" : "#C9FEFF",
             },
@@ -165,6 +166,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
                 fontWeight: "500",
                 lineHeight: "24px",
                 color: isDark ? "rgb(203, 213, 225)" : "rgb(15, 23, 42)",
+
             },
         },
         headRow: {
@@ -245,7 +247,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
                 // paginationComponentOptions={paginationOptions}
                 noDataComponent={<div style={{ display: "flex", justifyContent: "center", padding: "2rem", flexDirection: "row", gap: "1rem", background: "rgb(11 55 51 0)", width: "100%" }}>
 
-                    <p className="text-center text-bold text-2xl" style={noDataStyle}>
+                    <p className="text-center text-bold text-2xl text-inherit" style={noDataStyle}>
                         Empty list
                     </p>
                 </div>

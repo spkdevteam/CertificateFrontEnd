@@ -29,20 +29,6 @@ const ResetPasswordPage = ({formData,setFormData}) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        // if (name == "otp") {
-        //     if (value == "") {
-
-        //         setFormDataErr((prev) => ({
-        //             ...prev,
-        //             otp: "OTP is Required",
-        //         }))
-        //     } else {
-        //         setFormDataErr((prev) => ({
-        //             ...prev,
-        //             otp: "",
-        //         }))
-        //     }
-        // }
         if (name == "password") {
             if (value == "") {
                 setFormDataErr((prev) => ({

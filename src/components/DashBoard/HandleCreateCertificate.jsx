@@ -45,19 +45,19 @@ function HandleCreateCertificate({ value, onChange }) {
   return (
     <div className='w-full bg-white  bg-opacity-5 rounded-md    shadow-md  '>
       <div className='    p-6   flex flex-col gap-6'>
-        <h2 className='  font-semibold text-gray-800     pb-2'>Certificate Details {formData?.displayId || ''}</h2>
+        <h2 className='  font-semibold text-gray-800 text-inherit    pb-2'>Certificate Details {formData?.displayId || ''}</h2>
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           <div className='flex flex-col gap-2'>
-            <label className='text-gray-700 text-sm '>Certificate Number</label>
+            <label className='text-gray-700 text-sm text-inherit'>Certificate Number</label>
             <SPKInputText value={formData.certificateNumber} name={'certificateNumber'} onChange={handleChange} className='border border-inherit  p-2  ' />
           </div>
           <div className='flex flex-col gap-2  '>
-            <label className='text-gray-700 font-medium'>Fineness</label>
+            <label className='text-gray-700 font-medium text-inherit'>Fineness</label>
             <SPKNumberInput value={formData.goldFineness} name={'goldFineness'} onChange={handleChange} className='border border-inherit   p-2  ' />
           </div>
           <div className='flex flex-col gap-2'>
-            <label className='text-gray-700 font-medium'>Weight</label>
+            <label className='text-gray-700 font-medium text-inherit'>Weight</label>
             <SPKNumberInput value={formData.goldWeight} name={'goldWeight'} onChange={handleChange} className='border border-inherit   p-2  ' />
           </div>
         </div>

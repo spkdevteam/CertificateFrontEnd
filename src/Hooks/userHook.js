@@ -5,6 +5,7 @@ import handleForgotPassword from "../services/user/forgotPasswordUser"
 import handleOtp from "../services/user/otpUser"
 import handleReset from "../services/user/resetPasswordUser"
 import { useDispatch } from "react-redux"
+import handlelogoutUser from './../services/user/logoutUser';
 
 const userAuth = {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODIwODRkYTg0MGYzYTdiZjFhMmY3MiIsImVtYWlsIjoia2FzaWZidTJAeW9wbWFpbC5jb20iLCJpYXQiOjE3Mzk4MjE4NTcsImV4cCI6MTczOTkwODI1N30.HDzL5zVnfiMYNboGnkelTYT06g94Hi98XK6YTLRuiPM",
@@ -199,8 +200,26 @@ const useHandleUserHook = () => {
         return result
     }
 
+    const logoutUser=async({userId})=>{
+        try {
+            const response=await handlelogoutUser({userId});
+            if(response?.status===true){
+                toast.success(response?.message)
 
-    return { verifyTocken, isTokenValid, userSlice, loginUser, forgotUser, otpUser, resetUser }
+            }
+            else{
+                toast.error(response?.message || "logout failed")
+            }
+            return response
+            
+        } catch (error) {
+            console.log(error)
+            
+        }
+    }
+
+
+    return { verifyTocken, isTokenValid, userSlice, loginUser, forgotUser, otpUser, resetUser,logoutUser }
 }
 
 export default useHandleUserHook

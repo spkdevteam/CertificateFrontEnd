@@ -85,7 +85,7 @@ const DashBoard = () => {
                     </div>
 
                     {/* Data Table Component */}
-                    <div className="w-full h-full border border-inherit rounded-md overflow-scroll ">
+                    <div className="w-full h-full border border-inherit rounded-md  overflow-scroll ">
                         <SpkDataTable onChangePage={getCertificateLIst} updateTable={updateDataTable} columns={columns} />
                     </div>
                 </div>

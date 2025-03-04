@@ -8,7 +8,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     clientUser:  storedAdmin ? storedAdmin : null,
-    isAuth: storedAdmin ? true : false
+    isAuth: storedAdmin ? true : false,
   },
   reducers: {
     setClientUser: (state, action) => {
