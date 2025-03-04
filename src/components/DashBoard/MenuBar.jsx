@@ -5,10 +5,12 @@ import useDynamicIcons from "../../Hooks/useDynamicIcons"
 const MenuBar = ()=>{
      const getMyIcon = useDynamicIcons()
         const LogoutIcon = getMyIcon('logOut')
+        const userName=useSelector(state=>state.auth.userName)
+        console.log(userName)
      return(
         <div  className="h-full flex justify-between items-center rounded-md border border-inherit shadow-md  p-4 bg-opacity-15  w-full ">
        <img src={image1} alt="" className="w-2/12 h-auto p-2  " />
-        
+        <p className="items-right">userName:{userName}</p>
         <button className=" bg-yellow-900 w-10 flex justify-center item-center  h-10 text-white rounded mr-2">
             <LogoutIcon className='w-full h-full p-3'/>
         </button>
