@@ -9,6 +9,7 @@ import SPKBTNThemedDelete from "../../common/Button/OutlineThemeButton/SPKBTNThe
 import HandleCreateCertificate from "../../components/DashBoard/HandleCreateCertificate";
 import useColourThemeHook from "../../Hooks/useColourThemeHook";
 import ColourThemeSelector from "../ThemePage/colourTheme";
+import ExcelSheetIntegration from "./ExcelSheetIntegration";
 
 const DashBoard = () => {
     const { getCertificateLIst, updateDataTable, deleteCertificateById } = useCertificatehook();
@@ -67,8 +68,8 @@ const DashBoard = () => {
     ];
 
     return (
-        <div className={`w-full h-full ${theme?.bgcolour} ${theme?.textColour} ${theme?.bordercolour} flex justify-center items-center bg-gray-100 text-sm`}>
-            <div className="lg:container gap-2 flex flex-col border border-inherit rounded-lg shadow-lg p-6 h-full">
+        <div className={`w-full h-full ${theme?.bgcolour} ${theme?.textColour} ${theme?.bordercolour} flex justify-center items-center  text-sm`}>
+            <div className="lg:container gap-2 flex flex-col border border-inherit rounded-lg shadow-lg p-6 h-full bg-white bg-opacity-5 ">
                 <div className="w-full flex-col gap-2 rounded-md shadow-lg flex items-center mb-4">
                     <MenuBar />
                     <ColourThemeSelector />
@@ -78,10 +79,13 @@ const DashBoard = () => {
                     {/* Certificate Creation Component */}
                     <div className="w-full rounded-md overflow-hidden text-inherit shadow-lg p-4">
                         <HandleCreateCertificate value={selectedCertificate} onUpdate={updateDataTable} />
+                         
+                            <ExcelSheetIntegration/>
+                        
                     </div>
 
                     {/* Data Table Component */}
-                    <div className="w-full h-full border border-inherit rounded-md overflow-scroll p-4">
+                    <div className="w-full h-full border border-inherit rounded-md overflow-scroll ">
                         <SpkDataTable onChangePage={getCertificateLIst} updateTable={updateDataTable} columns={columns} />
                     </div>
                 </div>

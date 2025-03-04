@@ -8,7 +8,7 @@ const SPKInputText = ({ value,name, className, onChange,placeHolder, onErrorExis
                 value={value}
                 onChange={(e)=>onChange(e)}
                 name = {name}
-                className={`${className} outline-none  focus:outline-0  focus:outline-blue-600 rounded-md uppercase`}
+                className={`${className} outline-none bg-white bg-opacity-5 focus:outline-0  focus:outline-blue-600 rounded-md uppercase`}
                 placeholder={placeHolder}
                 // onBlur={() => onErrorExist('Username')}
             />
