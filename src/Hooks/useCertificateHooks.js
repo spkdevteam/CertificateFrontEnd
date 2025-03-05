@@ -19,6 +19,8 @@ const useCertificatehook = () => {
         goldFineness: 0,
         goldWeight: 0,
     })
+
+
     const mandateValue = ['certificateNumber', 'goldFineness', 'goldWeight']
     const [formData, setFormDate] = useState({
         _id: "",
@@ -30,6 +32,10 @@ const useCertificatehook = () => {
     useEffect(() => {
         setUpdateDataTable(prev => prev + 1)
     }, [])
+
+    useEffect(()=>{
+        console.log(updateDataTable,'updateDataTableupdateDataTableupdateDataTableupdateDataTableupdateDataTable')
+    },[updateDataTable])
      
     useEffect(() => {
         if (selectedCertificate && Object.keys(selectedCertificate).length > 0) {
@@ -74,7 +80,7 @@ const useCertificatehook = () => {
         }
     
         if (result?.status) {
-            toast.success(result.message);
+            toast.success('asasasass');
             setUpdateDataTable(prev => prev + 1); // ✅ This should trigger table refresh
         } else {
             toast.error(result.message);

@@ -22,6 +22,10 @@ const SearchCertificate = ({onSelect}) => {
  
     return (
         <div className="w-full h-full flex justify-end items-end  gap-4 p-4 ">
+           <div className="h-10 w-1/2">
+           {/* <PainScale startRange={10} endRange={20} value={12} name="pain"/>  */}
+           </div>
+
             <div className='flex flex-col gap-2'>
                 <label className='text-gray-700 font-medium'>Certificate Number</label>
                 <SPKDropDownSearchBox value={selectedCertificate}  name="certificateNumber" className="border p-2" single={false} onSelect={handleSelectCertificate} />

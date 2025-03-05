@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SpkDataTable from "../../common/DataTable/SpkDataTable";
 import MenuBar from "../../components/DashBoard/MenuBar";
 import useCertificatehook from "../../Hooks/useCertificateHooks";
@@ -15,6 +15,10 @@ const DashBoard = () => {
     const { getCertificateLIst, updateDataTable, deleteCertificateById } = useCertificatehook();
     const { theme } = useColourThemeHook();
 
+    useEffect(()=>{
+        console.log(updateDataTable,'updateDataTableupdateDataTable')
+    },[updateDataTable])
+
     const [selectedCertificate, setSelectedCertificate] = useState({
         _id: "",
         displayId: "",
@@ -29,7 +33,7 @@ const DashBoard = () => {
 
     const handleDelete = async (id, certificateNumber) => {
         await deleteCertificateById({ id, certificateNumber });
-        updateDataTable(); // Ensure the table updates after deletion
+        
     };
 
     const columns = [
