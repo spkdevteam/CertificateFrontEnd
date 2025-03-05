@@ -7,6 +7,7 @@ import deleteCertificate from "../services/certificate/deleteCertificate";
 import confirmAction from "../common/Toast/confirmAction";
 import getcertificateBycertificateNumber from "../services/certificate/getcertificateBycertificateNumber";
 import getCertificateBySuggestion from "../services/certificate/getCertificateBySuggestion";
+import saveMultipleCertificate from "../services/certificate/saveMultipleCertificate";
 
 
 const useCertificatehook = () => {
@@ -139,9 +140,28 @@ const useCertificatehook = () => {
 
     }
 
+    const multipleCertificate=async({data})=>{
+
+        try {
+            const response=await saveMultipleCertificate({data})
+            console.log(data)
+            console.log(response)
+            if(response?.status===true){
+                toast.success(response?.message)
+                return response
+            }
+            else{
+                toast.error(response?.message)
+            }
+        } catch (error) {
+            console.log(error)
+            
+        }
+    }
 
 
-    return { createOrEditCertificate, formData, getCertificateLIst, setFormDate, updateDataTable,deleteCertificateById,viewCertificate,selectedCertificate,searchCertificate }
+
+    return { createOrEditCertificate, formData, getCertificateLIst, setFormDate, updateDataTable,deleteCertificateById,viewCertificate,selectedCertificate,searchCertificate,multipleCertificate }
 }
 
 
