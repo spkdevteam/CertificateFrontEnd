@@ -1,11 +1,13 @@
-import { useColorScheme } from '@mui/material';
-import React, { useState, useEffect, useRef } from "react";
+
+
+ import React, { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import { FiUpload, FiMinusCircle } from "react-icons/fi";
 import SPKBTNView from '../../common/Button/SPKBTNView';
-import SPKBTNInsert from '../../common/Button/SPKBTNInsert';
+import useCertificatehook from "../../Hooks/useCertificateHooks";
 
 function Excel() {
+  
   const [data, setData] = useState([]);
   const [selectedMainField, setSelectedMainField] = useState("");
   const [selectedSubField, setSelectedSubField] = useState("");
@@ -15,25 +17,21 @@ function Excel() {
   const [filteredColumns, setFilteredColumns] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showPreview, setShowPreview] = useState(false); // New state to toggle preview visibility
-  
-  // Reference for the dropdown to detect clicks outside
+  const [showPreview, setShowPreview] = useState(true);
+
   const dropdownRef = useRef(null);
+  const { multipleCertificate } = useCertificatehook();
 
   const mainFields = {
     Company: {
-      companyName: "Company Name",
-      companyPhone: "Company Phone",
-      companyEmail: "Company Email",
+      certificateNumber: "certificateNumber",
+      goldFineness: "goldFineness",
+      goldWeight: "goldWeight",
     },
-    Invoice: {
-      invoiceNumber: "Invoice Number",
-      date: "Date",
-      amount: "Amount",
-      tax: "Tax",
-    },
+    
   };
 
+  // Function to handle file upload
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -51,34 +49,64 @@ function Excel() {
       setFilteredColumns(Object.keys(parsedData[0] || {}));
       setFileUploaded(true);
       setMergedData([]);
+      
     };
   };
 
+  // Function to merge selected fields
   const handleMerge = () => {
-    if (!selectedMainField || !selectedSubField || !selectedColumn) return;
+    if (!selectedMainField || !selectedSubField || !searchQuery) return;
+
+    const fieldKey = mainFields[selectedMainField][selectedSubField];
+
     const newMergedData = data.map((row, index) => {
-      const existingMergedRow = mergedData[index] || {}; 
+      const existingMergedRow = mergedData[index] || {};
+
       return {
         ...existingMergedRow,
-        [`${mainFields[selectedMainField][selectedSubField]}`]: row[selectedColumn] || "", 
+        [fieldKey]: filteredColumns.includes(searchQuery) ? row[searchQuery] || "" : searchQuery,
       };
     });
 
-    if (searchQuery && !filteredColumns.includes(searchQuery)) {
-      newMergedData.forEach((row) => {
-        row[searchQuery] = searchQuery;
-      });
-    }
+    const previewColumns = Object.values(mainFields[selectedMainField]);
 
-    setMergedData(newMergedData);
-    setShowPreview(!showPreview); // Toggle the preview visibility
+    const filteredMergedData = newMergedData.map(row => {
+      return Object.keys(row)
+        .filter(key => previewColumns.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = row[key];
+          return obj;
+        }, {});
+    });
+
+    setMergedData(filteredMergedData);
+    setShowPreview(true);
+    console.log("Merged Data:", filteredMergedData);
   };
+
+  // Function to send merged data to backend
+  const multipleSaveCertificate = async () => {
+    try {
+      if (mergedData.length === 0) {
+        console.log("No merged data to send.");
+        return;
+      }
+  
+      const response = await multipleCertificate({ data: mergedData });
+  
+      console.log("Response from API:", response?.data);
+      return response?.data;
+    } catch (error) {
+      console.error("Error sending merged data:", error);
+      console.log(data)
+    }
+  };
+  
 
   const closeDropdown = () => {
     setShowDropdown(false);
   };
 
-  // Detect clicks outside the dropdown to close it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -87,31 +115,32 @@ function Excel() {
     };
 
     document.addEventListener('click', handleClickOutside);
-
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center  bg-gray-100 w-full ">
+    <div className="flex flex-col items-center justify-center bg-gray-100 w-full">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-5xl">
         <h2 className="text-sm font-semibold text-center text-gray-700 mb-4">
           Upload & Merge Data
         </h2>
 
-        <label className="w-auto flex text-sm items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md cursor-pointer hover:bg-blue-600">
+        <label className=" flex text-sm items-center justify-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md cursor-pointer hover:bg-blue-600">
           <FiUpload className="text-lg" />
           <span>Select an Excel file</span>
-          <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} hidden className="hidden" />
+          <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} hidden />
         </label>
-      
+
         {fileUploaded && (
-            
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 w-full">
             <div>
-              <h3 className="text-sm font-semibold text-gray-700 mb-2">Select Main Field</h3>
-              <select className="p-2 border rounded w-full" value={selectedMainField} onChange={(e) => { setSelectedMainField(e.target.value); setSelectedSubField(""); }}>
+              <h3 className="text-sm  flex-col font-semibold text-gray-700 mb-2">Select Main Field</h3>
+              <select
+                className="p-2 border rounded w-full"
+                value={selectedMainField}
+                onChange={(e) => { setSelectedMainField(e.target.value); setSelectedSubField(""); }}>
                 <option value="">-- Select Main Field --</option>
                 {Object.keys(mainFields).map((field, idx) => (
                   <option key={idx} value={field}>{field}</option>
@@ -121,7 +150,10 @@ function Excel() {
             {selectedMainField && (
               <div>
                 <h3 className="text-sm font-semibold text-gray-700 mb-2">Select Sub Field</h3>
-                <select className="p-2 border rounded w-full" value={selectedSubField} onChange={(e) => setSelectedSubField(e.target.value)}>
+                <select
+                  className="p-2 border rounded w-full"
+                  value={selectedSubField}
+                  onChange={(e) => setSelectedSubField(e.target.value)}>
                   <option value="">-- Select Sub Field --</option>
                   {Object.entries(mainFields[selectedMainField]).map(([key, label], idx) => (
                     <option key={idx} value={key}>{label}</option>
@@ -130,8 +162,15 @@ function Excel() {
               </div>
             )}
             <div className="relative" ref={dropdownRef}>
-              <h3 className="text-sm font-semibold text-gray-700 mb-2">Select a Column</h3>
-              <input type="text" placeholder="Search column..." value={searchQuery} onClick={() => setShowDropdown(true)} onChange={(e) => setSearchQuery(e.target.value)} className="p-2 border rounded w-full mb-2" />
+              <h3 className="text-sm font-semibold text-gray-700 mb-2">Select or Enter a Column</h3>
+              <input 
+                type="text" 
+                placeholder="Enter value or select column..." 
+                value={searchQuery} 
+                onClick={() => setShowDropdown(true)} 
+                onChange={(e) => setSearchQuery(e.target.value)} 
+                className="p-2 border rounded w-full mb-2" 
+              />
               {showDropdown && (
                 <div className="absolute w-full bg-white border rounded shadow-md max-h-40 overflow-auto z-10">
                   {filteredColumns.map((col, idx) => (
@@ -175,6 +214,11 @@ function Excel() {
                 ))}
               </tbody>
             </table>
+
+            <div className="mt-4 text-center">
+              <SPKBTNView onClick={multipleSaveCertificate} text={"Send to Backend"} />
+            </div>
+            
           </div>
         )}
       </div>
