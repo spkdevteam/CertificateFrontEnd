@@ -72,7 +72,7 @@ const DashBoard = () => {
             <div className="lg:container gap-2 flex flex-col border border-inherit rounded-lg shadow-lg p-6 h-full bg-white bg-opacity-5 ">
                 <div className="w-full flex-col gap-2 rounded-md shadow-lg flex items-center mb-4">
                     <MenuBar />
-                    <ColourThemeSelector />
+                    {/* <ColourThemeSelector /> */}
                 </div>
 
                 <div className="w-full flex flex-col gap-6 md:flex-row p-4 border border-inherit">
