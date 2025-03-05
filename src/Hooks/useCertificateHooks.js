@@ -7,10 +7,14 @@ import deleteCertificate from "../services/certificate/deleteCertificate";
 import confirmAction from "../common/Toast/confirmAction";
 import getcertificateBycertificateNumber from "../services/certificate/getcertificateBycertificateNumber";
 import getCertificateBySuggestion from "../services/certificate/getCertificateBySuggestion";
+import { useDispatch } from "react-redux";
+import { updateTableTableStatus } from "../store/updateTableSlice";
 
 
 const useCertificatehook = () => {
     const [certificateLIst, setCertificateList] = useState([])
+    const dispath = useDispatch()
+
     const [updateDataTable, setUpdateDataTable] = useState(1)
     const [selectedCertificate,setSeletedCertificate] = useState({
         _id: "",
@@ -19,6 +23,7 @@ const useCertificatehook = () => {
         goldFineness: 0,
         goldWeight: 0,
     })
+    const[isLoading,setIsLoading]=useState(false)
 
 
     const mandateValue = ['certificateNumber', 'goldFineness', 'goldWeight']
@@ -26,17 +31,17 @@ const useCertificatehook = () => {
         _id: "",
         displayId: "",
         certificateNumber: "",
-        goldFineness: 0,
+        goldFineness:0,
         goldWeight: 0,
     })
     useEffect(() => {
-        setUpdateDataTable(prev => prev + 1)
+    setUpdateDataTable(prev => prev + 1)
     }, [])
 
     useEffect(()=>{
         console.log(updateDataTable,'updateDataTableupdateDataTableupdateDataTableupdateDataTableupdateDataTable')
     },[updateDataTable])
-     
+   
     useEffect(() => {
         if (selectedCertificate && Object.keys(selectedCertificate).length > 0) {
             console.log(selectedCertificate, 'selectedCertificate');
@@ -49,9 +54,11 @@ const useCertificatehook = () => {
 
     const getCertificateLIst = async ({ page, rowPerPage, keyWord }) => {
         const result = await getAllCertificate({ page, rowPerPage, keyWord })
+        console.log("=======>>",result?.data)
         
 
         const { data, metaData } = result
+        setCertificateList(data)
 
         return { data, totalDataCount:metaData?.totalDocs }
     } 
@@ -62,29 +69,51 @@ const useCertificatehook = () => {
             toast.error(`${validateValue?.join(',')} is missing `)
             return;
         }
+        setIsLoading(true)
+
+        try {
+
+            let result;
+            if (!inputData?._id?.length) {
+                result = await postCreateCertificate({
+                    certificateNumber: inputData.certificateNumber, 
+                    goldFineness: inputData.goldFineness, 
+                    goldWeight: inputData.goldWeight
+                });
+            } else {
+                result = await putUpdateCertificate({
+                    certificateNumber: inputData.certificateNumber, 
+                    goldFineness: inputData.goldFineness, 
+                    goldWeight: inputData.goldWeight, 
+                    _id: inputData?._id
+                });
+            }
+        
+            if (result?.status) {
+                toast.success(result?.message);
+                // getCertificateLIst({ page: 0, rowPerPage: 10, keyWord: "" });
+                //  setUpdateDataTable(prev => prev + 1);
+                const fetchedData = await getCertificateLIst({ page: 0, rowPerPage: 10, keyWord: "" });
+                console.log(fetchedData?.data)
+            setCertificateList(fetchedData.data); // Update the certificate list state
+            dispath(updateTableTableStatus())  
+
+            
+ // ✅ This should trigger table refresh
+
+            } else {
+                toast.error(result.message);
+            }
     
-        let result;
-        if (!inputData?._id?.length) {
-            result = await postCreateCertificate({
-                certificateNumber: inputData.certificateNumber, 
-                goldFineness: inputData.goldFineness, 
-                goldWeight: inputData.goldWeight
-            });
-        } else {
-            result = await putUpdateCertificate({
-                certificateNumber: inputData.certificateNumber, 
-                goldFineness: inputData.goldFineness, 
-                goldWeight: inputData.goldWeight, 
-                _id: inputData?._id
-            });
+
+            
+        } catch (error) {
+            console.log(error)
+            
+        }finally{
+            setIsLoading(false)
         }
     
-        if (result?.status) {
-            toast.success('asasasass');
-            setUpdateDataTable(prev => prev + 1); // ✅ This should trigger table refresh
-        } else {
-            toast.error(result.message);
-        }
     };
     
     const deleteCertificateById = async ({id,certificateNumber})=>{
@@ -94,7 +123,7 @@ const useCertificatehook = () => {
             const result = await deleteCertificate({id})
             if(result?.status){
                 toast.success(result.message)
-                setUpdateDataTable(prev => prev + 1)
+                dispath(updateTableTableStatus())  
             }
             else{
                 toast.error(result.message)
@@ -141,7 +170,7 @@ const useCertificatehook = () => {
 
 
 
-    return { createOrEditCertificate, formData, getCertificateLIst, setFormDate, updateDataTable,deleteCertificateById,viewCertificate,selectedCertificate,searchCertificate }
+    return { createOrEditCertificate, formData, getCertificateLIst, setFormDate, updateDataTable,deleteCertificateById,viewCertificate,selectedCertificate,searchCertificate,isLoading,setIsLoading,setUpdateDataTable,certificateLIst,setCertificateList }
 }
 
 

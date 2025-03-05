@@ -11,9 +11,10 @@ import SPKColumnDiv from '../../common/SPKDIV/spkColumdiv';
 import SPKRowDiv from '../../common/SPKDIV/SPKDIv';
 
 function HandleCreateCertificate({ value, onChange }) {
-  const { formData,setFormDate,createOrEditCertificate,updateDataTable} = useCertificatehook()
-  const [isloading,setIsLoading] = useState(false)
+  const { formData,setFormDate,createOrEditCertificate,updateDataTable,isLoading,setIsLoading,certificateLIst} = useCertificatehook()
+  // const [isloading,setIsLoading] = useState(false)
   useEffect(()=>{
+    console.log(updateDataTable)
     setIsLoading(false)
   },[updateDataTable])
    
@@ -65,9 +66,9 @@ function HandleCreateCertificate({ value, onChange }) {
 
       <div className='w-full flex gap-4 justify-end items-center p-4 '>
         {
-          formData?._id && !isloading
+          formData?._id && !isLoading
             ? <SPKBTNEdit onClick={() => {createOrEditCertificate(formData);setIsLoading(true) }} text='Edit' />
-            : !formData?._id && !isloading ? <SPKBTNSave onClick={() => {createOrEditCertificate(formData);setIsLoading(true) }} text='Save' />
+            : !formData?._id && !isLoading ? <SPKBTNSave onClick={() => {createOrEditCertificate(formData);setIsLoading(true) }} text='Save' />
             :<SPKBTNLoading text='Saving '/>
         }
         

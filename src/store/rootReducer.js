@@ -19,6 +19,7 @@ import moDalSlice from "./handleModal";
 import menuSlice from "./menuSlice"
 import themeSlice from './themeSlice'
 import accountSlice from './accountsSlice'
+import updateTableSlice from './updateTableSlice'
 
 
 const rootReducer = {
@@ -40,7 +41,8 @@ const rootReducer = {
     menuSlice:menuSlice,
     profileSclice,
     theme :themeSlice,
-    accounts:accountSlice
+    accounts:accountSlice,
+    updateTable:updateTableSlice
     // filteredMenuSlice
 }
 

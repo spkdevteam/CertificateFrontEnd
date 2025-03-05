@@ -5,7 +5,7 @@ import useDarkmode from "../../Hooks/useDarkMode";
 import useColourThemeHook from "../../Hooks/useColourThemeHook";
 
 
-const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { }, showSummary = false, columns = [], subHeaderComponent, pagination = true, updateTable = 0, subHeader = false }) => {
+const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }, showSummary = false, columns = [], subHeaderComponent, pagination = true, updateTable = 0, subHeader = false }) => {
     const {theme} =  useColourThemeHook()
     // Component: SpkDataTable
     // Description: A reusable data grid component built with react-data-table-component, featuring dynamic data fetching, pagination, custom styling, dark mode support, and expandable rows.
@@ -25,6 +25,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
     const [totalRow, setTotalRows] = useState(0)
     const [keyWord, setKeyWord] = useState('')
     const [summary, setSummary] = useState({})
+    const [update, setUpdate] = useState(updateTable);
     // const [isDark] = useDarkmode()
 
     const handlePageChange = async (page) => {
@@ -33,28 +34,37 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
             // console.log(onChangePage,'onChangePage')
 
             const response = await onChangePage({ page: page ? page - 1 : page, keyword: keyWord, rowPerPage: rowPerPage }) //isAdmin: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? true : false, branchId: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? null : currentUser?.branch 
+            console.log("API Response",response)
             const { data, totalDataCount } = response;
 
             setInputArray(data);
             setTotalRows(totalDataCount);
             setCurrentPage(page)
 
-            setPending(false)
+            // setPending(false)
         } catch (error) {
-            setPending(false)
+            // setPending(false)
             console.log("Error while getting Chair", error);
+        }finally{
+            setPending(false)
         }
     };
 
     useEffect(() => {
         setSummary({ ...getTotal(inputArray), _id: 1 })
     }, [inputArray])
+    useEffect(()=>{
+        console.log("update=>>>>>>>>>>>>>>>>",update);
+    },[update])
 
     useEffect(()=>{
         console.log(updateTable,'updateTableupdateTableupdateTableupdateTableupdateTable')
         handlePageChange(handlePageChange(1))
-        handlePageChange(1)
+        console.log("hit");
+     
     },[updateTable])
+
+   
 
 
     const getTotal = (data) => {
@@ -107,6 +117,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
     };
     useEffect(() => {
         handlepagination()
+        
     }, [updateTable,rowPerPage])
 
 

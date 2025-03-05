@@ -8,6 +8,7 @@ import useDarkmode from "../../Hooks/useDarkMode";
 import { useDispatch } from "react-redux";
 import authService from "../../services/auth.Service";
 import toast from "react-hot-toast";
+import { loginPageImage } from './../../constant/images';
 
 
 const ForgotPasswordPage = ({formData,setFormData,loading,sendOtp}) => {
@@ -27,14 +28,14 @@ const ForgotPasswordPage = ({formData,setFormData,loading,sendOtp}) => {
     return (
         <div className="forgotPassImage relative bg-red-800  w-[100%] h-[100vh] flex  items-center justify-center lg:justify-end">
 
-            <div className="flex justify-center items-center  group  w-full h-[100%] bg-gradient-to-br">
+            <div className="flex justify-end items-center  group  w-full h-[100%] bg-gradient-to-br">
 
                 <div className="absolute">
-                    <img src="https://t4.ftcdn.net/jpg/04/91/47/35/360_F_491473567_gIr3ndIFtW2Cd5GD5UnG0tNXVgK7g25J.jpg" alt="" className="w-[110vw] h-[130vh]" />
+                    <img src={`${loginPageImage}`}alt="" className="w-[110vw] h-[130vh]" />
                 </div>
 
                 {/* Glassy Card */}
-                <div className="bg-white/20 ml-11 z-[999999] backdrop-blur-lg shadow-lg border border-[#FFFFFF]/70 rounded-3xl p-8 max-w-lg h-auto">
+                <div className="bg-white/20 ml-11 me-10 w-full lg:w-3/12 md::w-6/12 z-[999999] backdrop-blur-lg shadow-lg border border-[#FFFFFF]/70 rounded-3xl p-8 max-w-lg h-auto">
                     {/* Logo */}
                     <div className="flex justify-center">
                     </div>
@@ -73,7 +74,7 @@ const ForgotPasswordPage = ({formData,setFormData,loading,sendOtp}) => {
 
                         {/* Back to login */}
                         <div
-                            onClick={() => navigate("/signInPage")}
+                            onClick={() => navigate("/staff/login")}
                             className="flex items-center justify-end mt-4  text-base cursor-pointer">
 
                             <span><ArrowCircleLeft size="22" color="#697689" className="mr-1" /></span> <Link to="/signInPage" className="hover:underline">Back to login</Link>

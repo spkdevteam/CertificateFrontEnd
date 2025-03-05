@@ -10,14 +10,16 @@ import HandleCreateCertificate from "../../components/DashBoard/HandleCreateCert
 import useColourThemeHook from "../../Hooks/useColourThemeHook";
 import ColourThemeSelector from "../ThemePage/colourTheme";
 import ExcelSheetIntegration from "./ExcelSheetIntegration";
+import { useSelector } from "react-redux";
+
 
 const DashBoard = () => {
-    const { getCertificateLIst, updateDataTable, deleteCertificateById } = useCertificatehook();
+    const { getCertificateLIst,updateDataTable,  deleteCertificateById } = useCertificatehook();
     const { theme } = useColourThemeHook();
+    const [create, setCreate] = useState(0);
+    const updateTable = useSelector((state)=>state.updateTable.updateStatus)
 
-    useEffect(()=>{
-        console.log(updateDataTable,'updateDataTableupdateDataTable')
-    },[updateDataTable])
+    
 
     const [selectedCertificate, setSelectedCertificate] = useState({
         _id: "",
@@ -90,7 +92,7 @@ const DashBoard = () => {
 
                     {/* Data Table Component */}
                     <div className="w-full h-full border border-inherit rounded-md  overflow-scroll ">
-                        <SpkDataTable onChangePage={getCertificateLIst} updateTable={updateDataTable} columns={columns} />
+                        <SpkDataTable onChangePage={getCertificateLIst} updateTable={updateTable} columns={columns} />
                     </div>
                 </div>
             </div>
