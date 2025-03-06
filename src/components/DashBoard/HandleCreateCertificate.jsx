@@ -21,6 +21,11 @@ function HandleCreateCertificate({ value, onChange }) {
 
   const handleChange = (e)=>{
     const {name , value} = e.target 
+  //   if ((name === "goldFineness" || name === "goldWeight") && parseFloat(value) <= 0) {
+  //     toast.error(`${name} must be greater than 0`);
+  //     return;
+  // }
+
     setFormDate((prev)=>({
       ...prev,
       [name]:value
@@ -55,22 +60,35 @@ function HandleCreateCertificate({ value, onChange }) {
           </div>
           <div className='flex flex-col gap-2  '>
             <label className='text-gray-700 font-medium text-inherit'>Fineness</label>
-            <SPKNumberInput value={formData.goldFineness} name={'goldFineness'} onChange={handleChange} className='border border-inherit   p-2  ' />
+            <SPKInputText value={formData.goldFineness.toString()} name={'goldFineness'} onChange={handleChange} className='border border-inherit   p-2  ' />
           </div>
           <div className='flex flex-col gap-2'>
             <label className='text-gray-700 font-medium text-inherit'>Weight</label>
-            <SPKNumberInput value={formData.goldWeight} name={'goldWeight'} onChange={handleChange} className='border border-inherit   p-2  ' />
+            <SPKInputText value={formData.goldWeight.toString()} name={'goldWeight'} onChange={handleChange} className='border border-inherit   p-2  ' />
           </div>
         </div>
       </div>
 
       <div className='w-full flex gap-4 justify-end items-center p-4 '>
-        {
+        {/* {
           formData?._id && !isLoading
             ? <SPKBTNEdit onClick={() => {createOrEditCertificate(formData);setIsLoading(true) }} text='Edit' />
             : !formData?._id && !isLoading ? <SPKBTNSave onClick={() => {createOrEditCertificate(formData);setIsLoading(true) }} text='Save' />
             :<SPKBTNLoading text='Saving '/>
-        }
+        } */}
+
+{
+    !isLoading ? (
+        formData?._id ? (
+            <SPKBTNEdit onClick={() => createOrEditCertificate(formData)} text='Edit' />
+        ) : (
+            <SPKBTNSave onClick={() => createOrEditCertificate(formData)} text='Save' />
+        )
+    ) : (
+        <SPKBTNLoading text='Saving' />
+    )
+}
+
         
 
         <SPKBTNCancel onClick={()=>handleClear()} text='Clear' className='px-4 py-2 rounded-lg shadow-md bg-red-500 text-white' />

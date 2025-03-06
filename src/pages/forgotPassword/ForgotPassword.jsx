@@ -78,12 +78,15 @@ const ForgotPassword = () => {
                 setPasswordUpdateStages(2)
             }
             else {
-                toast.error("Required fields are empty")
+                toast.error(result?.data?.message)
             }
 
         } catch (error) {
-            console.log(error)
+            toast.error("Something went wrong. Please try again.");
 
+           
+        }finally{
+            setLoading(false)
         }
 
 

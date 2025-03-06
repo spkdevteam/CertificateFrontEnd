@@ -65,10 +65,15 @@ const useCertificatehook = () => {
 
     const createOrEditCertificate = async (inputData) => {
         const validateValue = mandateValue?.filter((val) => !inputData[val]?.length)
-        if (validateValue.length) {
-            toast.error(`${validateValue?.join(',')} is missing `)
-            return;
-        }
+        // if (validateValue.length) {
+        //     toast.error(`${validateValue?.join(',')} is missing `)
+        //     return;
+        // }
+
+        // if(inputData.goldFineness<=0 || inputData.goldWeight<=0){
+        //     toast.error("Gold Fineness and Gold weight must be greater than zero")
+        //     return
+        // }
         setIsLoading(true)
 
         try {
