@@ -5,6 +5,7 @@
  import useWidth from "../../Hooks/useWidth";
   import Checkbox from "../../components/ui/Checkbox";
  import useDarkmode from "../../Hooks/useDarkMode";
+ import { loginPageImage } from "../../constant/images";
 
 
 const OtpVerifyPage = ({otpArray, otpInputs, handleOtpChange, handleOtpKeyDown, verifyOtp, loading,formData,setFormData}) => {
@@ -19,16 +20,16 @@ const OtpVerifyPage = ({otpArray, otpInputs, handleOtpChange, handleOtpKeyDown, 
     return (
         <div className="otpBgImg relative  w-[100%] h-[100vh] flex  items-center justify-center lg:justify-end">
 
-            <div className="flex justify-center items-center  group  w-full h-[100%] bg-gradient-to-br">
+            <div className="flex justify-end items-center  group  w-full h-[100%] bg-gradient-to-br">
 
                 {/* <div
                     class="circle absolute  h-[157vh] w-[105vw] top-[-12.5em] right-[-42.5em]  bg-[#4CB8C4]/50  duration-500 z-[99] op"
                 ></div> */}
                 <div className="absolute">
-                    <img src="https://t4.ftcdn.net/jpg/04/91/47/35/360_F_491473567_gIr3ndIFtW2Cd5GD5UnG0tNXVgK7g25J.jpg" alt="" className="w-[120vw] h-[130vh]" />
+                    <img src={`${loginPageImage}`} alt="" className="w-[120vw] h-[130vh]" />
                 </div>
                 {/* Glassy Card */}
-                <div className="bg-white/20 ml-11 z-[999999] backdrop-blur-lg shadow-lg border border-[#FFFFFF]/70 rounded-3xl p-8 max-w-md h-auto">
+                <div className="bg-white/20 ml-11 me-10 w-full lg:w-3/12 md::w-6/12 z-[999999] backdrop-blur-lg shadow-lg border border-[#FFFFFF]/70 rounded-3xl p-8 max-w-md h-auto">
                     {/* Logo */}
                     <div className="flex justify-center">
                         {/* <img src={logo} alt="Company Logo" className="" /> */}

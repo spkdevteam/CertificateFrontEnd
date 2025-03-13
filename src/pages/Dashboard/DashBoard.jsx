@@ -61,12 +61,19 @@ const DashBoard = () => {
             name: "Actions",
             selector: (row) => (
                 <div className="flex justify-center items-center gap-2">
-                    <Tooltip content="Edit" placement="top" arrow animation="shift-away">
+                    {/* <Tooltip content="Edit" placement="top" arrow animation="shift-away">
                         <>
                             <SPKBTNThemedEdit onClick={() => handleEdit(row)} width="w-10" />
                             <SPKBTNThemedDelete onClick={() => handleDelete(row?._id, row?.certificateNumber)} width="w-10" />
                         </>
+                    </Tooltip> */}
+                                        <Tooltip content="Edit" placement="top" arrow animation="shift-away">
+                        <SPKBTNThemedEdit onClick={() => handleEdit(row)} width="w-10" />
                     </Tooltip>
+                    <Tooltip content="Delete" placement="top" arrow animation="shift-away">
+                        <SPKBTNThemedDelete onClick={() => handleDelete(row?._id, row?.certificateNumber)} width="w-10" />
+                    </Tooltip>
+
                 </div>
             ),
             center: true,
@@ -83,7 +90,7 @@ const DashBoard = () => {
 
                 <div className="w-full flex flex-col gap-6 md:flex-row p-4 border border-inherit">
                     {/* Certificate Creation Component */}
-                    <div className="w-full rounded-md overflow-hidden text-inherit shadow-lg p-4">
+                    <div className="w-full md:w-1/2 rounded-md overflow-hidden text-inherit shadow-lg p-4">
                         <HandleCreateCertificate value={selectedCertificate} onUpdate={updateDataTable} />
                          
                             <ExcelSheetIntegration/>
@@ -91,7 +98,7 @@ const DashBoard = () => {
                     </div>
 
                     {/* Data Table Component */}
-                    <div className="w-full h-full border border-inherit rounded-md  overflow-scroll ">
+                    <div className="w-full md:w-1/2 h-full border border-inherit rounded-md  overflow-scroll ">
                         <SpkDataTable onChangePage={getCertificateLIst} updateTable={updateTable} columns={columns} />
                     </div>
                 </div>

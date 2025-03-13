@@ -188,7 +188,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
         },
         headCells: {
             style: {
-                display: "flex",
+                // display: "flex",
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
@@ -196,7 +196,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
                 color: isDark ? "rgb(203, 213, 225)" : "rgb(71, 85, 105)",
                 fontWeight: "700",
                 fontSize: "16px",
-                textAlign: "center",
+                textAlign: "left",
                 paddingTop: "20px",
                 paddingLeft: "15px",
                 paddingBottom: "15px",
@@ -237,7 +237,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
 
     // Render the DataTable component
     return (
-        <div className="w-full h-full        border-gray-200 border-opacity-20  min-h-full   justify-start   items-start">
+        <div className="w-full h-full        border-gray-200 border-opacity-20  min-h-full   justify-start   items-start ">
 
             <DataTable
                 columns={columns}
@@ -253,6 +253,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
                 // selectableRows
                 pointerOnHover
                 progressPending={pending}
+                style={{ minWidth: "100%" }}
                 subHeader={subHeader}
                 subHeaderComponent={subHeaderComponent}
                 // paginationComponentOptions={paginationOptions}

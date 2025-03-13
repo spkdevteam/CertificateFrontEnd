@@ -6,11 +6,11 @@ const putUpdateCertificate = async ({ _id,certificateNumber,goldFineness,goldWei
     const data = {
         _id: _id,
         certificateNumber: certificateNumber,
-        goldFineness: goldFineness,
-        goldWeight: goldWeight,
+        // goldFineness: goldFineness,
+        // goldWeight: goldWeight,
         clientId: clientId
       }
-    const result = await certificateapi.put(`/certificate/updateCertificate/update`,data,
+    const result = await certificateapi.put(`/certificate/editStaticCertificate`,data,
         // {
         // headers: {
         //     Authorization: `Bearer ${authToken}`,

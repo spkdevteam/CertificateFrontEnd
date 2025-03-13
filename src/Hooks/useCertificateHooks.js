@@ -26,7 +26,7 @@ const useCertificatehook = () => {
     const[isLoading,setIsLoading]=useState(false)
 
 
-    const mandateValue = ['certificateNumber', 'goldFineness', 'goldWeight']
+    const mandateValue = ['certificateNumber']
     const [formData, setFormDate] = useState({
         _id: "",
         displayId: "",
@@ -82,14 +82,14 @@ const useCertificatehook = () => {
             if (!inputData?._id?.length) {
                 result = await postCreateCertificate({
                     certificateNumber: inputData.certificateNumber, 
-                    goldFineness: inputData.goldFineness, 
-                    goldWeight: inputData.goldWeight
+                    // goldFineness: inputData.goldFineness, 
+                    // goldWeight: inputData.goldWeight
                 });
             } else {
                 result = await putUpdateCertificate({
                     certificateNumber: inputData.certificateNumber, 
-                    goldFineness: inputData.goldFineness, 
-                    goldWeight: inputData.goldWeight, 
+                    // goldFineness: inputData.goldFineness, 
+                    // goldWeight: inputData.goldWeight, 
                     _id: inputData?._id
                 });
             }
@@ -114,6 +114,7 @@ const useCertificatehook = () => {
             
         } catch (error) {
             console.log(error)
+            toast.error(error?.message)
             
         }finally{
             setIsLoading(false)
