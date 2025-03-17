@@ -8,12 +8,15 @@ import confirmAction from "../common/Toast/confirmAction";
 import getcertificateBycertificateNumber from "../services/certificate/getcertificateBycertificateNumber";
 import getCertificateBySuggestion from "../services/certificate/getCertificateBySuggestion";
 import { useDispatch } from "react-redux";
+
 import { updateTableTableStatus } from "../store/updateTableSlice";
+import saveMultipleCertificate from "../services/certificate/saveMultipleCertificate";
+
 
 
 const useCertificatehook = () => {
     const [certificateLIst, setCertificateList] = useState([])
-    const dispath = useDispatch()
+    const dispatch = useDispatch()
 
     const [updateDataTable, setUpdateDataTable] = useState(1)
     const [selectedCertificate,setSeletedCertificate] = useState({
@@ -53,8 +56,9 @@ const useCertificatehook = () => {
 
 
     const getCertificateLIst = async ({ page, rowPerPage, keyWord }) => {
-        const result = await getAllCertificate({ page, rowPerPage, keyWord })
-        console.log("=======>>",result?.data)
+        const validatedPage = isNaN(page) || page < 0 ? 0 : page;
+
+        const result = await getAllCertificate({ page:validatedPage, rowPerPage, keyWord })
         
 
         const { data, metaData } = result
@@ -65,15 +69,7 @@ const useCertificatehook = () => {
 
     const createOrEditCertificate = async (inputData) => {
         const validateValue = mandateValue?.filter((val) => !inputData[val]?.length)
-        // if (validateValue.length) {
-        //     toast.error(`${validateValue?.join(',')} is missing `)
-        //     return;
-        // }
-
-        // if(inputData.goldFineness<=0 || inputData.goldWeight<=0){
-        //     toast.error("Gold Fineness and Gold weight must be greater than zero")
-        //     return
-        // }
+        
         setIsLoading(true)
 
         try {
@@ -98,10 +94,10 @@ const useCertificatehook = () => {
                 toast.success(result?.message);
                 // getCertificateLIst({ page: 0, rowPerPage: 10, keyWord: "" });
                 //  setUpdateDataTable(prev => prev + 1);
-                const fetchedData = await getCertificateLIst({ page: 0, rowPerPage: 10, keyWord: "" });
-                console.log(fetchedData?.data)
-            setCertificateList(fetchedData.data); // Update the certificate list state
-            dispath(updateTableTableStatus())  
+            //     const fetchedData = await getCertificateLIst({ page: 0, rowPerPage: 10, keyWord: "" });
+            //     console.log(fetchedData?.data)
+            // setCertificateList(fetchedData.data); 
+            dispatch(updateTableTableStatus())  
 
             
  // ✅ This should trigger table refresh
@@ -113,7 +109,6 @@ const useCertificatehook = () => {
 
             
         } catch (error) {
-            console.log(error)
             toast.error(error?.message)
             
         }finally{
@@ -129,7 +124,8 @@ const useCertificatehook = () => {
             const result = await deleteCertificate({id})
             if(result?.status){
                 toast.success(result.message)
-                dispath(updateTableTableStatus())  
+
+                dispatch(updateTableTableStatus())  
             }
             else{
                 toast.error(result.message)
@@ -174,9 +170,26 @@ const useCertificatehook = () => {
 
     }
 
+    const multipleCertificate=async({data})=>{
+
+        try {
+            const response=await saveMultipleCertificate({data})
+             
+            if(response?.status===true){
+                toast.success(response?.message)
+                return response
+            }
+            else{
+                toast.error(response?.message)
+            }
+        } catch (error) {
+            console.log(error)
+            
+        }
+    }
 
 
-    return { createOrEditCertificate, formData, getCertificateLIst, setFormDate, updateDataTable,deleteCertificateById,viewCertificate,selectedCertificate,searchCertificate,isLoading,setIsLoading,setUpdateDataTable,certificateLIst,setCertificateList }
+    return { createOrEditCertificate, formData, getCertificateLIst, setFormDate, updateDataTable,deleteCertificateById,viewCertificate,selectedCertificate,searchCertificate,isLoading,setIsLoading,setUpdateDataTable,certificateLIst,setCertificateList,multipleCertificate }
 }
 
 

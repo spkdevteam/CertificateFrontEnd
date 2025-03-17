@@ -1,12 +1,13 @@
 import { hrApi } from "../../axios/axiosSetup"
 
 
-const handleAPiloginUser = async({email,password})=>{
+const handleAPiloginUser = async({userId,password,companyId})=>{
     const clientId = import.meta.env.VITE_CLIENTID
-
+     
     const data={
-        userId:email,
+        userId:userId,
         password:password,
+        companyId:companyId,
         clientId:clientId
 
     }

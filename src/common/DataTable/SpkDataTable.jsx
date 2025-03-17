@@ -29,9 +29,10 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
     // const [isDark] = useDarkmode()
 
     const handlePageChange = async (page) => {
+    
         try {
             setPending(true)
-            // console.log(onChangePage,'onChangePage')
+           
 
             const response = await onChangePage({ page: page ? page - 1 : page, keyword: keyWord, rowPerPage: rowPerPage }) //isAdmin: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? true : false, branchId: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? null : currentUser?.branch 
             console.log("API Response",response)
@@ -41,9 +42,9 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
             setTotalRows(totalDataCount);
             setCurrentPage(page)
 
-            // setPending(false)
+         
         } catch (error) {
-            // setPending(false)
+          
             console.log("Error while getting Chair", error);
         }finally{
             setPending(false)
@@ -53,16 +54,23 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
     useEffect(() => {
         setSummary({ ...getTotal(inputArray), _id: 1 })
     }, [inputArray])
-    useEffect(()=>{
-        console.log("update=>>>>>>>>>>>>>>>>",update);
-    },[update])
+    // useEffect(()=>{
+    //     console.log("update=>>>>>>>>>>>>>>>>",update);
+    // },[update])
 
     useEffect(()=>{
-        console.log(updateTable,'updateTableupdateTableupdateTableupdateTableupdateTable')
+        console.log("Fetching data with:", {
+            currentPage,
+            rowPerPage,
+            keyWord,
+        });
+    
         handlePageChange(handlePageChange(1))
-        console.log("hit");
+       
      
     },[updateTable])
+
+    
 
    
 
@@ -103,7 +111,6 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
             setPending(true);
 
             const result = await onChangePage({ page: currentPage, rowPerPage: rowPerPage, keyword: keyWord })
-            // console.log("Fetched Data",result)
 
             const { data, totalDataCount } = result;
             let index = -1
@@ -118,7 +125,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
     useEffect(() => {
         handlepagination()
         
-    }, [updateTable,rowPerPage])
+    }, [updateTable,currentPage])
 
 
     const SummatyDataTableStyle = {
@@ -188,7 +195,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
         },
         headCells: {
             style: {
-                // display: "flex",
+                display: "flex",
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
@@ -196,7 +203,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
                 color: isDark ? "rgb(203, 213, 225)" : "rgb(71, 85, 105)",
                 fontWeight: "700",
                 fontSize: "16px",
-                textAlign: "left",
+                textAlign: "center",
                 paddingTop: "20px",
                 paddingLeft: "15px",
                 paddingBottom: "15px",

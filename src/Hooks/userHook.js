@@ -5,7 +5,8 @@ import handleForgotPassword from "../services/user/forgotPasswordUser"
 import handleOtp from "../services/user/otpUser"
 import handleReset from "../services/user/resetPasswordUser"
 import { useDispatch } from "react-redux"
-import handlelogoutUser from './../services/user/logoutUser';
+import handlelogoutUser from './../services/user/logoutUser'; 
+ 
 
 const userAuth = {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODIwODRkYTg0MGYzYTdiZjFhMmY3MiIsImVtYWlsIjoia2FzaWZidTJAeW9wbWFpbC5jb20iLCJpYXQiOjE3Mzk4MjE4NTcsImV4cCI6MTczOTkwODI1N30.HDzL5zVnfiMYNboGnkelTYT06g94Hi98XK6YTLRuiPM",
@@ -176,27 +177,26 @@ const useHandleUserHook = () => {
         else setTokenValid(false)
     }
 
-    const loginUser = ({email,password}) => {
-        
-            const result =handleAPiloginUser({email,password })
-        
-           return result
+    const loginUser =async ({userId,password,companyId}) => {
+            console.log(userId,password)
+            const result =await  handleAPiloginUser({userId,password,companyId})
+            return result
 
 
     }
 
-    const forgotUser = ({ email }) => {
-        const result = handleForgotPassword({ email: email })
+    const forgotUser = async ({ email }) => {
+        const result = await handleForgotPassword({ email: email })
         return result
     }
 
-    const otpUser = ({ id, otp }) => {
-        const result = handleOtp({ id: id, otp: otp })
+    const otpUser =async ({ id, otp }) => {
+        const result = await handleOtp({ id: id, otp: otp })
         return result
     }
 
-    const resetUser = ({ id, password, otp }) => {
-        const result = handleReset({ id, password, otp })
+    const resetUser = async({ id, password, otp }) => {
+        const result = await handleReset({ id, password, otp })
         return result
     }
 
