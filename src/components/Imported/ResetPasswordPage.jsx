@@ -131,7 +131,7 @@ const ResetPasswordPage = ({formData,setFormData}) => {
             if (response?.data?.status) {
             
                 toast.success(response?.data?.message)
-                navigate("/staff/login")
+                navigate("/")
             }
             else{
                 toast.error(response?.data?.message)

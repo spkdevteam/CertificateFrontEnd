@@ -51,10 +51,10 @@ const LoginPage = () => {
 
 
     const handleSubmit = async (e) => {
+        setLoading(true)
 
        
-        
-
+            try {
                 const result = await loginUser({ userId: formData.userId, password: formData.password })
 
                 if (result?.status === true) {
@@ -69,9 +69,16 @@ const LoginPage = () => {
                 else {
                     toast.error(result?.message)
                 }
+
+
+            } catch (error) {
+               toast.error(error?.message) 
+            }finally{
+                setLoading(false)
+            }
+
             
         
-            setLoading(false)
         
 
     };
