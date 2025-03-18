@@ -177,9 +177,9 @@ const useHandleUserHook = () => {
         else setTokenValid(false)
     }
 
-    const loginUser =async ({userId,password,companyId}) => {
+    const loginUser =async ({userId,password}) => {
             console.log(userId,password)
-            const result =await  handleAPiloginUser({userId,password,companyId})
+            const result =await  handleAPiloginUser({userId,password})
             return result
 
 

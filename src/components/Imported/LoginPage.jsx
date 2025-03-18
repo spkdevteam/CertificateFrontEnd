@@ -61,6 +61,7 @@ const LoginPage = () => {
                     const firstName = result?.data?.firstName
                     const lastName=result?.data?.lastName
                     const userId = result?.data?._id
+                    console.log(userId,"aaaa")
                     dispatch(setClientUser({ firstName, userId,lastName }))
                     toast.success(result?.message)
                     navigate('/dashboard')

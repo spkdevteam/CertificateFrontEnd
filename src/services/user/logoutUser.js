@@ -4,8 +4,8 @@ import { hrApi } from "../../axios/axiosSetup"
 const handlelogoutUser=async({userId})=>{
     const clientId = import.meta.env.VITE_CLIENTID;
     const data={
-        clientId:clientId,
-        userId:userId
+        userId:userId,
+       clientId:clientId,
 
     }
 
