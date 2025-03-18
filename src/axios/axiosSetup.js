@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import axios from 'axios'; 
 // Create Axios instance
 const inventoryapi = axios.create({
   baseURL: import.meta.env.VITE_INVENTORY_URL,  

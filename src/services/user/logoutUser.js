@@ -9,7 +9,7 @@ const handlelogoutUser=async({userId})=>{
 
     }
 
-    const response=await hrApi.post("/users/logout",data);
+    const response=await hrApi.post("/users/logout",data,{withCredentials: true});
     return response?.data
 }
 
