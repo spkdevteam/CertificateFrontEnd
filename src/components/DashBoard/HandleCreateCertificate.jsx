@@ -132,9 +132,9 @@ function HandleCreateCertificate({ value }) {
   };
 
   return (
-    <div className="w-full bg-white bg-opacity-5 rounded-md shadow-md overflow-hidden p-4">
+    <div className="w-full bg-white bg-opacity-5 rounded-md text-sm shadow-md overflow-hidden p-4">
       <h2 className="text-gray-800 text-sm sm:text-base pb-2">
-        Certificate Details {formData?.displayId || ''}
+         {formData?.displayId || ''}
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
@@ -144,6 +144,7 @@ function HandleCreateCertificate({ value }) {
             value={formData.certificateNumber}
             name="certificateNumber"
             onChange={handleChange}
+            placeHolder={'Enter Certificate Number'}
             className="border border-inherit p-2 w-full"
           />
         </div>

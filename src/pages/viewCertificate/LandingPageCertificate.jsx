@@ -1,11 +1,14 @@
 import React from 'react'
 import gold from '../../assets/images/logo/gold.png'
 import gold2 from '../../assets/images/all-img/gold2.png';
+import { image1 } from '../../constant/images';
+
+ 
 const  LandingPageCertificate = ()=> {
     return (
         <div>
             <div className=" p-4  flex  items-center justify-between">
-                <img src={gold} className="w-[70px] md:w-[93px] ml-2 md:ml-0" />
+                <img src={image1} alt="" className="w-2/12 h-auto p-2  " />
                 <div className="mr-3 md:mr-16">
                     <button className="bg-[#b98f2d]  text-white px-3 py-1 md:px-4 md:py-2 text-base md:text-xl font-poppins">
                         Back to site
@@ -17,13 +20,13 @@ const  LandingPageCertificate = ()=> {
                 <hr className="mt-2 mx-3 md:mx-12" />
             </div>
             
-            <div className='min-h-screen flex flex-col justify-center'>
+            <div className=' pt-4 pb-4 flex flex-col justify-center'>
             <div className="container  mx-auto grid grid-cols-1 md:grid-cols-[1.3fr_1fr] large:grid-cols-2 max-w-full gap-6 px-4">
                 <div className="p-6 md:col-span-1 flex justify-center order-1 md:order-2 mr-6">
                     <img src={gold2} alt="gold_image" className="w-[450px] sm:w-[200px] md:w-[420px] lg:w-[280px] max-w-full bg-cover bg-center" />
                 </div>
 
-                <div className="md:ml-14 md:p-6   order-2 md:order-1">
+                <div className="md:ml-14      order-2 md:order-1">
                     <h2 className="font-bold text-xl md:text-2xl font-poppins">Instructions</h2>
                     <p className="text-sm md:text-base  mt-3 font-poppins">
                         We are excited to introduce a new feature that will simplify the process of accessing your certificate details. Now, you can effortlessly obtain the information you need by following the below steps.

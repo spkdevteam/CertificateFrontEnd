@@ -3,6 +3,7 @@ import CerticateView from "../../components/ViewCertificate/CerticateView"
 import SearchCertificate from "../../components/ViewCertificate/SearchCertificate"
 import useCertificatehook from "../../Hooks/useCertificateHooks"
 import LandingPageCertificate from "./LandingPageCertificate"
+import image1 from "../../assets/emirates.png"
 const ViewCertificate = () => {
     const [selectedCertificate, setSelectedCertificate] = useState(null)
     const{viewCertificate}=useCertificatehook()
@@ -53,14 +54,13 @@ useEffect(() => {
         <div className="w-full h-full bg-white flex justify-center overflow-scroll items-center">
             <div className="lg:container flex flex-col gap-2">
 
-                <div className="w-full h-20 rounded-md shadow-xl  ">
-                    <SearchCertificate onSelect={handleSelecteCertificate} />
-
-                </div>
-                <div className="w-full   rounded-md shadow-xl  ">
+               
+                <div className="w-full flex justify-start flex-col items-start  rounded-md shadow-xl  ">
 
                     <LandingPageCertificate />
+                    <SearchCertificate onSelect={handleSelecteCertificate} />
                 </div>
+                 
                 <div className="w-full   rounded-md shadow-xl  ">
                     <CerticateView value={selectedCertificate} />
                 </div>
