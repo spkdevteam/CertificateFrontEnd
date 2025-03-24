@@ -152,7 +152,7 @@ function HandleCreateCertificate({ value }) {
       <div className="w-full flex flex-wrap gap-2 justify-end items-center pt-4">
         {!isLoading ? (
           formData?._id ? (
-            <SPKBTNEdit onClick={() => createOrEditCertificate(formData)} text="Edit" />
+            <SPKBTNSave onClick={() => createOrEditCertificate(formData)} text="Save" />
           ) : (
             <SPKBTNSave onClick={() => createOrEditCertificate(formData)} text="Save" />
           )
