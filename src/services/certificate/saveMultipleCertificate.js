@@ -6,7 +6,7 @@ const saveMultipleCertificate=async({data})=>{
 
     const inputdata={data,clientId }
 
-    const response=await certificateapi.post("/certificate/saveMultiple",inputdata)
+    const response=await certificateapi.post("/certificate/createMultipleCertificateWithStatic",inputdata)
     return response?.data
 }
 

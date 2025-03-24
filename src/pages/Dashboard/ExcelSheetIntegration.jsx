@@ -25,8 +25,8 @@ function Excel() {
   const mainFields = {
     Company: {
       certificateNumber: "certificateNumber",
-      goldFineness: "goldFineness",
-      goldWeight: "goldWeight",
+      // goldFineness: "goldFineness",
+      // goldWeight: "goldWeight",
     },
     
   };
