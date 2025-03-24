@@ -117,16 +117,16 @@ function App() {
   // const [isDark] = useDarkmode()
   const isDark = false
   // const vieModal = useSelector((state) => state?.modalSlice?.showModal) || false
-   
+
 
 
   return (
     <>
       <main className={`${isDark ? "bg-darkBody text-white" : "bg-lightBody"}  `} style={{ width: "100vw", height: "h-screen", overflowX: "hidden", overflowY: "hidden" }}>
-        <ToastContainer position='top-center' /> 
-      {/* {vieModal && <MyModal DisplayPage='newAppointment' />} */}
+        <ToastContainer position='top-center' />
+        {/* {vieModal && <MyModal DisplayPage='newAppointment' />} */}
         <Routes>
-            
+
           <Route path="/" element={<AuthLayout />}>
             <Route element={<PublicRoutes />}>
               <Route path="/" element={<StaffLogin />} />
@@ -138,25 +138,25 @@ function App() {
               {/* <Route path="/staff/signinbyotp" element={<StaffOtpVerify />} /> */}
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/staff/resetpassword" element={<StaffResetPassword />} />
-            <Route path='/forgotpassword' element={<ForgotPasswordForm/>}/>
+              <Route path='/forgotpassword' element={<ForgotPasswordForm />} />
               {/* <Route path='/dashboard' element={<DashBoard/>}/> */}
-              <Route path='/viewCertificate' element={<ViewCertificate/>}/>
+              <Route path='/viewCertificate' element={<ViewCertificate />} />
 
-            <Route path="/watch" element={<ParrentWatch/>}/>
-            <Route path="/activity" element={<Activity/>}/>
+              <Route path="/watch" element={<ParrentWatch />} />
+              <Route path="/activity" element={<Activity />} />
 
-            <Route element={<PrivateRoute />}/>
-            <Route path='/dashboard' element={<DashBoard/>}/>
-            
-            
-            {/* <Route path="/previewCaseDetails" element={<PreviewCaseDetails />} />
+              <Route element={<PrivateRoute />} />
+              <Route path='/dashboard' element={<DashBoard />} />
+
+
+              {/* <Route path="/previewCaseDetails" element={<PreviewCaseDetails />} />
             <Route path="/previewPrescription" element={<PreviewPrescription />} />
             <Route path="/patientPrescription" element={<Priscription />} />
             <Route path="/patientAppointment" element={<PatientAppointment />} /> */}
 
               <Route path="/" element={<Layout />}>
 
-              {/* <Route path="/dashboard" element={<DashboardTwo />} /> */}
+                {/* <Route path="/dashboard" element={<DashboardTwo />} /> */}
                 {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                 {/* <Route path="/profile" element={<Profile />} />
                 <Route path="/ViewProfile" element={<ViewProfile />} />
@@ -175,9 +175,9 @@ function App() {
                 {/* <Route path="/createPatient" element={<CreatePatient />} /> */}
                 {/* <Route path="/invoices" element={<InvoiceList />} />
                 <Route path="/chairdashboard" element={<ChairDashBoard />} /> */}
-                
 
-                
+
+
                 {/* <Route path="/editPriscription" element={<EditPriscription />} />
                 <Route path="/editInvoice" element={<EditInvoice />} />
                 <Route path="/viewInvoice" element={<PrintInvoice />} />
@@ -209,7 +209,7 @@ function App() {
                 <Route path="/appointment" element={<Appointment />} />
               </Route> */}
 
-              {/* <Route path="/table" element={<TableComponent />} />
+                {/* <Route path="/table" element={<TableComponent />} />
               <Route path="/modalPatients" element={<ModalPatients />} />
               <Route path="/modalAppointments" element={<ModalAppointments />} />
               <Route path="/modalBranch" element={<ModalBranch />} />
@@ -235,12 +235,12 @@ function App() {
               <Route path='/dentalChart' element={<DentalChart />} />
               <Route path='/invoiceDesign' element={<Invoice />} /> */}
 
-              {/* <Route path="/activityProfile"  element={<ActivityProfile />}/> */}
+                {/* <Route path="/activityProfile"  element={<ActivityProfile />}/> */}
 
 
+              </Route>
             </Route>
-            </Route>
-            </Route>
+          </Route>
           {/* <Route path="*" element={<DashBoard />} /> */}
 
         </Routes>

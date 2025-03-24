@@ -5,6 +5,8 @@ import * as XLSX from "xlsx";
 import { FiUpload, FiMinusCircle } from "react-icons/fi";
 import SPKBTNView from '../../common/Button/SPKBTNView';
 import useCertificatehook from "../../Hooks/useCertificateHooks";
+import SPKBTNInsert from "../../common/Button/SPKBTNInsert";
+import SPKBTNExport from "../../common/Button/SPKBTNExport";
 
 function Excel() {
   
@@ -23,10 +25,10 @@ function Excel() {
   const { multipleCertificate } = useCertificatehook();
 
   const mainFields = {
-    Company: {
+    Certificates: {
       certificateNumber: "certificateNumber",
-      goldFineness: "goldFineness",
-      goldWeight: "goldWeight",
+      // goldFineness: "goldFineness",
+      // goldWeight: "goldWeight",
     },
     
   };
@@ -216,7 +218,7 @@ function Excel() {
             </table>
 
             <div className="mt-4 text-center">
-              <SPKBTNView onClick={multipleSaveCertificate} text={"Send to Backend"} />
+              <SPKBTNExport onClick={multipleSaveCertificate} text={"Upload"} />
             </div>
             
           </div>

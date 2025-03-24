@@ -99,9 +99,10 @@ const DashBoard = () => {
                             <ExcelSheetIntegration/>
                         
                     </div>
-
+                     
                     {/* Data Table Component */}
                     <div className="w-full md:w-1/2 h-full border border-inherit rounded-md  overflow-scroll ">
+                   
                         <SpkDataTable onChangePage={getCertificateLIst} updateTable={updateTable} columns={columns} />
                     </div>
                 </div>

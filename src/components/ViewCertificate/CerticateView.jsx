@@ -22,7 +22,7 @@ const CertificateView = ({value }) => {
 
       <div className="absolute flex flex-col w-full  items-center space-y-1 bg-opacity-50 px-4 mt-0 rounded">
         <div className="flex flex-col  w-full space-y-0 leading-none text-center pt-[5px]">
-          <div className="flex w-full " >
+          <div className="flex w-full   " >
             <p className="text-black font-light text-[8px] md:text-lg lg:text-lg text-end w-full xl:text-xl">
               Certificate Number: 
             </p>
