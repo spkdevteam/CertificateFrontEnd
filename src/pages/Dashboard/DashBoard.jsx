@@ -10,7 +10,8 @@ import HandleCreateCertificate from "../../components/DashBoard/HandleCreateCert
 import useColourThemeHook from "../../Hooks/useColourThemeHook";
 import ColourThemeSelector from "../ThemePage/colourTheme";
 import ExcelSheetIntegration from "./ExcelSheetIntegration";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTableTableStatus } from "../../store/updateTableSlice";
 
 
 const DashBoard = () => {
@@ -18,7 +19,8 @@ const DashBoard = () => {
     const { theme } = useColourThemeHook();
     const [create, setCreate] = useState(0);
     const updateTable = useSelector((state)=>state.updateTable.updateStatus)
-
+    const searchKey = useSelector((state)=>state.globalSearch.search)
+    const dispatch = useDispatch()
     
 
     const [selectedCertificate, setSelectedCertificate] = useState({
@@ -28,6 +30,13 @@ const DashBoard = () => {
         goldFineness: 0,
         goldWeight: 0,
     });
+    const[filteredCertificates,setFilteredCertificates]=useState([])
+    const [isNewCertificateAdded, setIsNewCertificateAdded] = useState(false);
+    useEffect(()=>{
+        console.log(searchKey,'searchKeysearchKeysearchKeysearchKeysearchKey')
+        dispatch(updateTableTableStatus())
+    },[searchKey])
+
 
     const handleEdit = (row) => {
          setSelectedCertificate(row);
@@ -35,8 +44,42 @@ const DashBoard = () => {
 
     const handleDelete =  (id, certificateNumber) => {
          deleteCertificateById({ id, certificateNumber });
+         if(isNewCertificateAdded){
+            setIsNewCertificateAdded(false)
+            fetchAllCertificates()
+         }
+         else{
+            fetchAllCertificates()
+         }
         
     };
+    useEffect(()=>{
+        fetchAllCertificates()
+    },[updateTable])
+
+    useEffect(() => {
+        console.log("filteredCertificates state updated:", filteredCertificates);
+    }, [filteredCertificates]);
+    
+
+    const fetchAllCertificates = async () => {
+        console.log({page:0,perPage:10,keyWord:searchKey},'{page:0,perPage:10,keyword:searchKey}')
+        const response = await getCertificateLIst({page:0,perPage:10,keyWord:searchKey});
+        console.log(response,"lalalalala")
+        const{data,totalDataCount}=response
+        return {data,totalDataCount}
+    };
+
+    const fetchLatestCertificate = async () => {
+        const data = await getCertificateLIst({page:0,perPage:10,keyword:""});
+        if (data.length > 0) {
+            setFilteredCertificates([data[data.length - 1]]);  // Show only the latest
+            setIsNewCertificateAdded(true);
+        }
+    };
+
+
+
 
     const columns =useMemo(()=>
         [
@@ -94,7 +137,7 @@ const DashBoard = () => {
                 <div className="w-full flex flex-col gap-6 md:flex-row p-4 border border-inherit">
                     {/* Certificate Creation Component */}
                     <div className="w-full md:w-1/2 rounded-md overflow-hidden text-inherit shadow-lg p-4">
-                        <HandleCreateCertificate value={selectedCertificate} onUpdate={updateDataTable} />
+                        <HandleCreateCertificate value={selectedCertificate} onUpdate={fetchLatestCertificate} />
                          
                             <ExcelSheetIntegration/>
                         
@@ -103,7 +146,7 @@ const DashBoard = () => {
                     {/* Data Table Component */}
                     <div className="w-full md:w-1/2 h-full border border-inherit rounded-md  overflow-scroll ">
                    
-                        <SpkDataTable onChangePage={getCertificateLIst} updateTable={updateTable} columns={columns} />
+                        <SpkDataTable onChangePage={fetchAllCertificates} updateTable={updateTable} columns={columns} />
                     </div>
                 </div>
             </div>

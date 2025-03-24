@@ -107,13 +107,22 @@ import SPKBTNCancel from '../../common/Button/SPKBTNCancel';
 import SPKBTNLoading from '../../common/Button/SPKBTNLoading';
 import SPKInputText from '../../common/Input/SPKInputText';
 import useCertificatehook from '../../Hooks/useCertificateHooks';
+import { useDispatch } from 'react-redux';
+import { updateGlobalSearch } from '../../store/reducer/globalSearch/globalSearchSlice';
 
-function HandleCreateCertificate({ value }) {
+function HandleCreateCertificate({ value,onUpdate }) {
   const { formData, setFormDate, createOrEditCertificate, isLoading, setIsLoading } = useCertificatehook();
-
+  const dispatch = useDispatch()
+  
   useEffect(() => {
     setFormDate(value);
   }, [value]);
+
+
+
+  useEffect(()=>{
+    dispatch(updateGlobalSearch(formData?.certificateNumber))
+  },[formData?.certificateNumber])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -122,6 +131,14 @@ function HandleCreateCertificate({ value }) {
       [name]: value,
     }));
   };
+
+  const handleSave = async () => {
+    const newCertificate = await createOrEditCertificate(formData);
+    if (newCertificate) {
+      onUpdate(); // This will trigger the fetchLatestCertificate function in DashBoard
+    }
+  };
+
 
   const handleClear = () => {
     setFormDate({
@@ -152,14 +169,12 @@ function HandleCreateCertificate({ value }) {
 
       <div className="w-full flex flex-wrap gap-2 justify-end items-center pt-4">
         {!isLoading ? (
-          formData?._id ? (
-            <SPKBTNSave onClick={() => createOrEditCertificate(formData)} text="Save" />
-          ) : (
-            <SPKBTNSave onClick={() => createOrEditCertificate(formData)} text="Save" />
-          )
-        ) : (
-          <SPKBTNLoading text="Saving" />
-        )}
+          <SPKBTNSave onClick={handleSave} text="Save"/>
+
+        ):(
+         <SPKBTNLoading text="Saving"/>
+        )
+      }
 
         <SPKBTNCancel
           onClick={handleClear}

@@ -20,7 +20,7 @@ import menuSlice from "./menuSlice"
 import themeSlice from './themeSlice'
 import accountSlice from './accountsSlice'
 import updateTableSlice from './updateTableSlice'
-
+import globalSearchSlice from "./reducer/globalSearch/globalSearchSlice"
 
 const rootReducer = {
 
@@ -42,7 +42,8 @@ const rootReducer = {
     profileSclice,
     theme :themeSlice,
     accounts:accountSlice,
-    updateTable:updateTableSlice
+    updateTable:updateTableSlice,
+    globalSearch:globalSearchSlice
     // filteredMenuSlice
 }
 

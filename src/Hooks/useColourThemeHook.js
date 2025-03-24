@@ -17,7 +17,7 @@ const useColourThemeHook = () => {
     }
 
     useEffect(()=>{
-        console.log(currentTheme,themeSet[currentTheme])
+       
         setTheme(themeSet[currentTheme||'normal'])
     },[currentTheme])
 
