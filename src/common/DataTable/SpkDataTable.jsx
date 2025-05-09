@@ -15,23 +15,32 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
 
 
 
-    const [expanded, setExpanded] = useState(false);
-    const [dataToGrid, setDataToGrid] = useState([]);
     const [pending, setPending] = useState(false)
-    const [currentPage, setCurrentPage] = useState(0)
+    const [currentPage, setCurrentPage] = useState(1)
     const [rowPerPage, setRowPerPage] = useState(10)
     const [inputArray, setInputArray] = useState([])
     const [totalRow, setTotalRows] = useState(0)
-    const [keyWord, setKeyWord] = useState('')
+
     const [summary, setSummary] = useState({})
     // const [isDark] = useDarkmode()
 
     const handlePageChange = async (page) => {
         try {
-            setPending(true)
-            
 
-            const response = await onChangePage({ page: page ? page - 1 : page, keyword: keyWord, rowPerPage: rowPerPage }) //isAdmin: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? true : false, branchId: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? null : currentUser?.branch 
+            setCurrentPage(page)
+
+
+        } catch (error) {
+
+            console.log("Error while getting Chair", error);
+        }
+    };
+
+    const fetchPaginationData = async () => {
+        try {
+            setPending(true)
+            const response = await onChangePage({ page: currentPage, rowPerPage: rowPerPage }) //isAdmin: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? true : false, branchId: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? null : currentUser?.branch 
+
             const { data, totalDataCount } = response;
 
             setInputArray(data);
@@ -48,10 +57,12 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
         setSummary({ ...getTotal(inputArray), _id: 1 })
     }, [inputArray])
 
-    useEffect(()=>{
-         
-        handlePageChange(handlePageChange(1))
-    },[updateTable])
+    useEffect(() => {
+        fetchPaginationData()
+    }, [currentPage, rowPerPage, updateTable])
+
+
+
 
 
     const getTotal = (data) => {
@@ -65,24 +76,10 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
     };
 
 
-    const goToNextPage = async (page) => {
-        try {
-            setPending(true);
-            const result = await onChangePage({ page: page, rowPerPage, keyword: keyWord }) || { data: [], totalDataCount: 0 };
-            const { data, totalDataCount } = result;
-            setCurrentPage(adjustedPage);
-            setInputArray(data);
-            setTotalRows(totalDataCount);
-        } catch (error) {
-            console.error("Error fetching page data:", error);
-        } finally {
-            setPending(false);
-        }
-    };
 
     const handleRowsPerPageChange = async (newRowsPerPage) => {
         setRowPerPage(newRowsPerPage);
-        setCurrentPage(0);
+        // setCurrentPage(0);
     };
 
     const handlepagination = async () => {
@@ -99,9 +96,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
             setPending(false);
         }
     };
-    useEffect(() => {
-        handlepagination()
-    }, [updateTable])
+
 
 
     const SummatyDataTableStyle = {
@@ -118,7 +113,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
 
     };
 
-   
+
 
 
 
@@ -129,81 +124,93 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
 
     // Custom styles for the DataTable
     const customStyles = {
-        table: {
-            style: {
-                backgroundColor: "transparent",
-            },
-        },
         header: {
             style: {
-                color: isDark ? "rgb(203, 213, 225)" : "green",
+                minHeight: "56px",
+                color: isDark ? "rgb(203 213 225 / var(--tw-text-opacity));" : "green",
                 fontWeight: "bold",
                 backgroundColor: isDark ? "#007475" : "#C9FEFF",
             },
         },
-        cells: {
-            style: {
-                backgroundColor: " transparent ",
-                padding: "1rem",
-                // color:"white"
-                 color: isDark ? "white" : "inherit", // White in dark mode, default in light mode
-            },
-        },
         subHeader: {
             style: {
-                backgroundColor: "transparent",
-                padding: "0rem",
+                backgroundColor: isDark
+                    ? ""
+                    : "white",
+                // padding: "1.25rem",
                 fontSize: "1.125rem",
                 fontWeight: "500",
                 lineHeight: "24px",
-                color: isDark ? "rgb(203, 213, 225)" : "rgb(15, 23, 42)",
+                color: isDark
+                    ? "rgb(203 213 225 / var(--tw-text-opacity))"
+                    : "rgb(15 23 42 / var(--tw-text-opacity))",
             },
         },
         headRow: {
             style: {
-                color: isDark ? "rgb(200, 200, 200)" : "rgb(71, 85, 105)",
+                color: isDark
+                    ? "rgb(203 213 225 / var(--tw-text-opacity))"
+                    : "rgb(71 85 105 / var(--tw-text-opacity))",
+                fontSize: "0.75rem",
+                fontWeight: "bold",
                 backgroundColor: isDark ? "#007475" : "#C9FEFF",
+                // textTransform: "uppercase",
+                textAlign: "center",
             },
         },
         headCells: {
             style: {
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "start",
-                width: "100%",
-                backgroundColor: isDark ? "rgb(0, 116, 117)" : "",
-                color: isDark ? "rgb(203, 213, 225)" : "rgb(71, 85, 105)",
-                fontWeight: "700",
-                fontSize: "16px",
-                textAlign: "center",
+                display: "flex", // Flex layout for perfect centering
+                justifyContent: "flex-start", // Horizontally center
+                alignItems: "center", // Vertically center
+                backgroundColor: isDark ? "rgb(0 116 117 / var(--tw-bg-opacity))" : "",
+                color: isDark
+                    ? "rgb(203 213 225 / var(--tw-text-opacity))"
+                    : "rgb(71 85 105 / var(--tw-text-opacity))",
+                fontWeight: "bold",
+                fontSize: "0.75rem",
+                textAlign: "start",
                 paddingTop: "20px",
-                paddingLeft: "15px",
+                //   paddingLeft: "20px",
                 paddingBottom: "15px",
             },
         },
-        rows: {
+        cells: {
             style: {
-                backgroundColor: "transparent",
+                display: "flex", // Flex layout for perfect centering
+                justifyContent: "flex-start", // Horizontally center
+                alignItems: "center", // Vertically center
+                backgroundColor: isDark ? "rgb(10 41 43 / var(--tw-bg-opacity))" : "",
+                color: isDark
+                    ? "rgb(203 213 225 / var(--tw-text-opacity))"
+                    : "rgb(71 85 105 / var(--tw-text-opacity))",
+                fontSize: "0.875rem",
+                // padding: "1.25rem",
+                // width: "5rem",
+                // textAlign: "center",
+                // borderBottom: "1px dashed", // Dashed border for rows
+                // borderBottomColor: isDark ? "rgb(203 213 225 / var(--tw-text-opacity))" : "rgb(189 189 189  / var(--tw-text-opacity))",
             },
         },
         selectableRows: {
             style: {
                 backgroundColor: "red",
-                color: "white", // Ensure selected rows have visible text
+                color: "red",
             },
         },
         pagination: {
             style: {
-                backgroundColor: "transparent",
-                color: isDark ? "rgb(255, 255, 255)" : "rgb(71, 85, 105)",
+                backgroundColor: isDark ? "rgb(10 41 43 / var(--tw-bg-opacity))" : "white",
+                color: isDark
+                    ? "rgb(255, 255, 255 / var(--tw-text-opacity))"
+                    : "rgb(71 85 105 / var(--tw-text-opacity))",
                 fontSize: "15px",
             },
         },
     };
-    
 
     const noDataStyle = {
-        backgroundColor: "transparent",
+        backgroundColor: isDark ? "rgb(11 55 51)" : "",
         color: isDark
             ? "rgb(203 213 225 / var(--tw-text-opacity))"
             : "rgb(15 23 42 / var(--tw-text-opacity))",
@@ -231,6 +238,7 @@ const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { 
                 onChangeRowsPerPage={handleRowsPerPageChange}
                 // selectableRows
                 pointerOnHover
+                // expandableRows
                 progressPending={pending}
                 subHeader={subHeader}
                 subHeaderComponent={subHeaderComponent}
