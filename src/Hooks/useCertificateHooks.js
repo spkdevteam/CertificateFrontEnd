@@ -55,10 +55,9 @@ const useCertificatehook = () => {
 
 
 
-    const getCertificateLIst = async ({ page, rowPerPage, keyWord }) => {
-        const validatedPage = page;
+    const getCertificateLIst = async ({ page=1, rowPerPage=10, keyWord }) => {
 
-        const result = await getAllCertificate({ page:validatedPage, rowPerPage, keyWord })
+        const result = await getAllCertificate({ page:page, rowPerPage, keyWord })
         
 
         const { data, metaData } = result

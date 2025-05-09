@@ -62,7 +62,7 @@ const DashBoard = () => {
     }, [filteredCertificates]);
     
 
-    const fetchAllCertificates = async ({page, rowPerPage, keyWord}) => {
+    const fetchAllCertificates = async ({page=1, rowPerPage=10, keyWord}) => {
         
         const response = await getCertificateLIst({page:page,perPage:rowPerPage,keyWord:searchKey});
         console.log(response,"lalalalala")
@@ -71,7 +71,7 @@ const DashBoard = () => {
     };
 
     const fetchLatestCertificate = async () => {
-        const data = await getCertificateLIst({page:0,perPage:10,keyword:""});
+        const data = await getCertificateLIst({page:1,perPage:10,keyword:""});
         if (data.length > 0) {
             setFilteredCertificates([data[data.length - 1]]);  // Show only the latest
             setIsNewCertificateAdded(true);
