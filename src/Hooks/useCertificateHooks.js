@@ -56,7 +56,7 @@ const useCertificatehook = () => {
 
 
     const getCertificateLIst = async ({ page, rowPerPage, keyWord }) => {
-        const validatedPage = isNaN(page) || page < 0 ? 0 : page;
+        const validatedPage = page;
 
         const result = await getAllCertificate({ page:validatedPage, rowPerPage, keyWord })
         
