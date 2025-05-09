@@ -62,9 +62,9 @@ const DashBoard = () => {
     }, [filteredCertificates]);
     
 
-    const fetchAllCertificates = async () => {
-        console.log({page:0,perPage:10,keyWord:searchKey},'{page:0,perPage:10,keyword:searchKey}')
-        const response = await getCertificateLIst({page:0,perPage:10,keyWord:searchKey});
+    const fetchAllCertificates = async ({page, rowPerPage, keyWord}) => {
+        
+        const response = await getCertificateLIst({page:page,perPage:rowPerPage,keyWord:searchKey});
         console.log(response,"lalalalala")
         const{data,totalDataCount}=response
         return {data,totalDataCount}

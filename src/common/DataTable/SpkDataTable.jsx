@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import GloabalLoading from "../globalLoader/GloabalLoading";
 import useDarkmode from "../../Hooks/useDarkMode";
-import useColourThemeHook from "../../Hooks/useColourThemeHook";
 
 
-const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }, showSummary = false, columns = [], subHeaderComponent, pagination = true, updateTable = 0, subHeader = false }) => {
-    const {theme} =  useColourThemeHook()
+const SpkDataTable = ({ isDark, onChangePage = (page, rowPerPage, keyWord) => { }, showSummary = false, columns = [], subHeaderComponent, pagination = true, updateTable = 0, subHeader = false }) => {
+
     // Component: SpkDataTable
     // Description: A reusable data grid component built with react-data-table-component, featuring dynamic data fetching, pagination, custom styling, dark mode support, and expandable rows.
     // Props:
@@ -25,54 +24,34 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
     const [totalRow, setTotalRows] = useState(0)
     const [keyWord, setKeyWord] = useState('')
     const [summary, setSummary] = useState({})
-    const [update, setUpdate] = useState(updateTable);
     // const [isDark] = useDarkmode()
 
     const handlePageChange = async (page) => {
-    
         try {
             setPending(true)
-           
+            
 
             const response = await onChangePage({ page: page ? page - 1 : page, keyword: keyWord, rowPerPage: rowPerPage }) //isAdmin: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? true : false, branchId: (currentUser?.roleId == 2 || currentUser?.roleId == 1) ? null : currentUser?.branch 
-            console.log("API Response",response)
             const { data, totalDataCount } = response;
 
             setInputArray(data);
             setTotalRows(totalDataCount);
-            setCurrentPage(page)
 
-         
-        } catch (error) {
-          
-            console.log("Error while getting Chair", error);
-        }finally{
             setPending(false)
+        } catch (error) {
+            setPending(false)
+            console.log("Error while getting Chair", error);
         }
     };
 
     useEffect(() => {
         setSummary({ ...getTotal(inputArray), _id: 1 })
     }, [inputArray])
-    // useEffect(()=>{
-    //     console.log("update=>>>>>>>>>>>>>>>>",update);
-    // },[update])
 
     useEffect(()=>{
-        console.log("Fetching data with:", {
-            currentPage,
-            rowPerPage,
-            keyWord,
-        });
-    
+         
         handlePageChange(handlePageChange(1))
-       
-     
     },[updateTable])
-
-    
-
-   
 
 
     const getTotal = (data) => {
@@ -109,9 +88,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
     const handlepagination = async () => {
         try {
             setPending(true);
-
             const result = await onChangePage({ page: currentPage, rowPerPage: rowPerPage, keyword: keyWord })
-
             const { data, totalDataCount } = result;
             let index = -1
             setInputArray(data?.map((currData) => ({ ...currData, index: ++index })));
@@ -124,8 +101,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
     };
     useEffect(() => {
         handlepagination()
-        
-    }, [updateTable,currentPage])
+    }, [updateTable])
 
 
     const SummatyDataTableStyle = {
@@ -142,9 +118,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
 
     };
 
-    useEffect(() => {
-        console.log(onChangePage, 'onChangePage')
-    }, [])
+   
 
 
 
@@ -163,7 +137,6 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
         header: {
             style: {
                 color: isDark ? "rgb(203, 213, 225)" : "green",
-                
                 fontWeight: "bold",
                 backgroundColor: isDark ? "#007475" : "#C9FEFF",
             },
@@ -184,13 +157,12 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
                 fontWeight: "500",
                 lineHeight: "24px",
                 color: isDark ? "rgb(203, 213, 225)" : "rgb(15, 23, 42)",
-
             },
         },
         headRow: {
             style: {
-                color: `${theme.textColour}`,
-                backgroundColor: `${theme.bgcolour}`,
+                color: isDark ? "rgb(200, 200, 200)" : "rgb(71, 85, 105)",
+                backgroundColor: isDark ? "#007475" : "#C9FEFF",
             },
         },
         headCells: {
@@ -244,7 +216,7 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
 
     // Render the DataTable component
     return (
-        <div className="w-full h-full        border-gray-200 border-opacity-20  min-h-full   justify-start   items-start ">
+        <div className="w-full h-full        border-gray-200 border-opacity-20  min-h-full   justify-start   items-start">
 
             <DataTable
                 columns={columns}
@@ -260,13 +232,12 @@ const SpkDataTable = ({ isDark, onChangePage =(page, rowPerPage, keyWord) => { }
                 // selectableRows
                 pointerOnHover
                 progressPending={pending}
-                style={{ minWidth: "100%" }}
                 subHeader={subHeader}
                 subHeaderComponent={subHeaderComponent}
                 // paginationComponentOptions={paginationOptions}
                 noDataComponent={<div style={{ display: "flex", justifyContent: "center", padding: "2rem", flexDirection: "row", gap: "1rem", background: "rgb(11 55 51 0)", width: "100%" }}>
 
-                    <p className="text-center text-bold text-2xl text-inherit" style={noDataStyle}>
+                    <p className="text-center text-bold text-2xl" style={noDataStyle}>
                         Empty list
                     </p>
                 </div>
