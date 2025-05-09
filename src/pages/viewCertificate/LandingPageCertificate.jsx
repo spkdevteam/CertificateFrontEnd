@@ -2,6 +2,7 @@ import React from 'react'
 import gold from '../../assets/images/logo/gold.png'
 import gold2 from '../../assets/images/all-img/gold2.png';
 import { image1 } from '../../constant/images';
+import gold3 from "../../assets/images/all-img/gold3.png"
 
  
 const  LandingPageCertificate = ()=> {
@@ -23,7 +24,7 @@ const  LandingPageCertificate = ()=> {
             <div className=' pt-4 pb-4 flex flex-col justify-center'>
             <div className="container  mx-auto grid grid-cols-1 md:grid-cols-[1.3fr_1fr] large:grid-cols-2 max-w-full gap-6 px-4">
                 <div className="p-6 md:col-span-1 flex justify-center order-1 md:order-2 mr-6">
-                    <img src={gold2} alt="gold_image" className="w-[450px] sm:w-[200px] md:w-[420px] lg:w-[280px] max-w-full bg-cover bg-center" />
+                    <img src={gold3} alt="gold_image" className="w-[450px] sm:w-[200px] md:w-[420px] lg:w-[280px] max-w-full bg-cover bg-center" />
                 </div>
 
                 <div className="md:ml-14      order-2 md:order-1">
@@ -38,7 +39,7 @@ const  LandingPageCertificate = ()=> {
                         <li>Step 4: Access and Download Your Certificate Details.</li>
                     </ul>
                     <p className="mt-3 text-sm md:text-base font-poppins">
-                        Feel free to send an email to <span className="font-bold">info@emiratesgold.ae</span>, and our dedicated support team will respond promptly. You can also reach us by phone at <span className="font-bold">+971 4 367 9030</span>
+                        Feel free to send an email to <span className="font-bold">info@emiratesrefineryltd.com</span>, and our dedicated support team will respond promptly. You can also reach us by phone at <span className="font-bold">+254787956403</span>
                     </p>
                     <p className="mt-3 text-sm md:text-base font-poppins">
                         Your satisfaction is our utmost priority, and we're here to ensure your experience is as smooth and efficient as possible.
