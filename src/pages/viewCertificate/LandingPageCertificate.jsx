@@ -3,15 +3,21 @@ import gold from '../../assets/images/logo/gold.png'
 import gold2 from '../../assets/images/all-img/gold2.png';
 import { image1 } from '../../constant/images';
 import gold3 from "../../assets/images/all-img/gold3.png"
+import gold1 from "../../assets/images/all-img/gold1.png"
 
  
 const  LandingPageCertificate = ()=> {
+
+    const handleClick=()=>{
+          window.location.href = "https://emiratesrefineryltd.com/";
+
+    }
     return (
         <div>
             <div className=" p-4  flex  items-center justify-between">
                 <img src={image1} alt="" className="w-2/12 h-auto p-2  " />
                 <div className="mr-3 md:mr-16">
-                    <button className="bg-[#b98f2d]  text-white px-3 py-1 md:px-4 md:py-2 text-base md:text-xl font-poppins">
+                    <button className="bg-[#b98f2d]  text-white px-3 py-1 md:px-4 md:py-2 text-base md:text-xl font-poppins" onClick={handleClick}>
                         Back to site
                     </button>
                 </div>
@@ -24,7 +30,7 @@ const  LandingPageCertificate = ()=> {
             <div className=' pt-4 pb-4 flex flex-col justify-center'>
             <div className="container  mx-auto grid grid-cols-1 md:grid-cols-[1.3fr_1fr] large:grid-cols-2 max-w-full gap-6 px-4">
                 <div className="p-6 md:col-span-1 flex justify-center order-1 md:order-2 mr-6">
-                    <img src={gold3} alt="gold_image" className="w-[450px] sm:w-[200px] md:w-[420px] lg:w-[280px] max-w-full bg-cover bg-center" />
+                    <img src={gold1} alt="gold_image" className="w-[450px] sm:w-[200px] md:w-[420px] lg:w-[280px] max-w-full bg-cover bg-center" />
                 </div>
 
                 <div className="md:ml-14      order-2 md:order-1">
